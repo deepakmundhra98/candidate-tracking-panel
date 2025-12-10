@@ -1,0 +1,294 @@
+.input-icon{
+    position: relative;
+}
+
+
+.input-icon i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+
+.input-icon input {
+    width: 100%;
+    padding: 10px 10px 10px 30px;
+    box-sizing: border-box;
+}
+
+/* Signup Css start  */
+
+.Signup{
+    padding: 80px 20px 20px;
+}
+
+/* Confiuration - General Setting */
+.generalSetting {
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+.generalSetting .bottomButtons .themeButton1 {
+    margin-right: 10px;
+}
+.generalSettingBox {
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 10px;
+  width: 100%;
+}
+.generalSettingText {
+  display: inline-block;
+  font-size: 20px;
+}
+.generalSettingIcon {
+  float: right;
+}
+
+.generalSetting {
+    margin: 20px 0;
+  }
+  
+  .labelText {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #000;
+  }
+  
+  .inputContainer {
+    flex-direction: column;
+  }
+  
+  .inputContainer select,
+  .inputContainer input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .row {
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  
+  .bottomButtons {
+    /* text-align: right; */
+    margin-top: 20px;
+  }
+  
+  .bottomButtons .button1 {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .bottomButtons .button2 {
+    background-color: #f8f9fa;
+    color: #000;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .bottomButtons .button1:hover {
+    background-color: #0056b3;
+  }
+  
+  .bottomButtons .button2:hover {
+    background-color: #e2e6ea;
+  }
+
+/* selected-candidates */
+
+  
+
+
+/* Email template */
+.dDrt {
+    margin-bottom: 15px;
+}
+.emailTemplateModal .dDrt span {
+    font-size: 18px;
+}
+
+.dDrt .template {
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+}
+.dDrt .value {
+    width: 100%;
+}
+
+.emailTemplateBody {
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+}
+.emailTemplateHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.emailTemplateHeader h2 {
+    font-size: 25px;
+    font-weight: normal;
+
+}
+.testEmailtemplateButton{
+    color: white;
+    border-radius: 3px;
+    border: 1px solid #ef4030;
+    background-color: #ef4030;
+}
+
+.testEmailtemplateButton:hover{
+    color: white;
+    border-radius: 3px;
+    border: 1px solid #b1382d;
+    background-color: #b1382d;
+}
+
+.emailTemplateBody .themeButton1 {
+    margin-right: 10px;
+}
+.emailTemplateBody .variableButton {
+    color: #1665d8;
+    border-radius: 3px;
+    border: 1px solid #1665d8;
+    background-color: white;
+    padding: 7px 20px;
+    display: inline-block;
+}
+.allbuttons {
+    display: flex;
+    
+}
+.APEditEmailTemplateButtons{
+    margin-right: 10px;
+}
+
+/* Currency */
+.adminChangeUsername .profilelogo .indexPageHeader {
+    width: 100%;
+}
+
+.adminChangeUsername .profilelogo .indexPageHeader h2{
+    display: inline-block;
+}
+
+.adminChangeUsername .profilelogo .indexPageHeader a{
+    float: right;
+}
+
+.currencyPage .addInterviewProcessForm {
+    background-color: white !important;
+}
+.currencyPage  .themeButton1 {
+    color: white;
+    border-radius: 3px;
+    border: 1px solid hsl(5, 86%, 56%);
+    background-color: #ef4030;
+    padding: 2px 20px;
+    margin-right: 10px;
+}
+
+
+/* Dashboard calender */
+.calendar-container {
+    position: relative;
+  }
+.calendar-container .react-calendar {
+  width: -webkit-fill-available;
+  max-width: 100%;
+  background: white;
+  border: none !important;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  line-height: 2.125em;
+}
+.calendar-container .react-calendar__navigation {
+  background-color: #9fc6ff;
+  color: white;
+}
+.calendar-container .react-calendar__tile--now {
+  background: #9fc6ff;
+  border-radius: 50%;
+}
+.calendar-container .react-calendar button {
+  position: relative;
+}
+.calendar-container .tile-content {
+  position: absolute;
+  top: 30px;
+  right: 22px;
+}
+
+.event-details {
+  display: grid;
+  grid-template-columns: max-content auto;
+  gap: 10px 15px;
+}
+
+.event-details div {
+  margin-bottom: 4px;
+}
+
+  .highlight {
+    background-color: #d4f1f4;
+    border-radius: 50%;
+    position: relative;
+  }
+  
+  .event-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #ff6f61;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-top: 5px;
+  }
+  
+  .event-modal {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    z-index: 1000;
+    width: 300px;
+  }
+  
+  .event-modal h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .event-modal ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .event-modal li {
+    font-size: 16px;
+    color: #333333;
+    margin: 5px 0;
+  }
+  
+
+  

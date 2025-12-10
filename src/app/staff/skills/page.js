@@ -1,0 +1,663 @@
+"use client";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import "../../common.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@fortawesome/fontawesome-free/css/all.css";
+import AdminFooter from "../../admin/Components/AdminFooter/AdminFooter";
+import axios from "axios";
+import BaseAPI from "../../BaseAPI/BaseAPI";
+import Cookies from "js-cookie";
+import Swal from "sweetalert2";
+import { DataGrid } from "@mui/x-data-grid";
+import { Button } from "react-bootstrap";
+import StaffLayout from "../StaffLayout";
+import { useRouter } from "next/navigation";
+
+const Page = () => {
+  const [userData, setUserData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [checkedData, setCheckedData] = useState([]);
+  const token = Cookies.get("tokenStaff");
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [userAccess, setUserAccess] = useState({});
+  const router = useRouter();
+
+  useEffect(() => {
+    const access = Cookies.get("access");
+
+    if (typeof access !== null || access !== "" || access !== undefined) {
+      // console.log(JSON.parse(access));
+
+      setUserAccess(JSON.parse(access));
+    } else {
+      setUserAccess({});
+    }
+  }, []);
+  const getData = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(BaseAPI + "/admin/skills/index", null, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer" + " " + token,
+        },
+      });
+      setUserData(response.data.response);
+      setLoading(false);
+      // console.log(response.data.response);
+    } catch (error) {
+      setLoading(false);
+      console.log(error.message);
+    }
+  };
+  const handleDelete = async (slug) => {
+    try {
+      const confirmationResult = await Swal.fire({
+        title: "Delete Skill?",
+        text: "Do you want to Delete this skill?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+      });
+      if (confirmationResult.isConfirmed) {
+        setLoading(true);
+        const response = await axios.post(
+          BaseAPI + `/admin/skills/delete/${slug}`,
+          null, // Pass null as the request body if not required
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer" + " " + token,
+            },
+          }
+        );
+        setLoading(false);
+        if (response.data.status === 200) {
+          Swal.fire({
+            title: "Skill deleted successfully!",
+            icon: "success",
+            confirmButtonText: "Close",
+          });
+          getData();
+        } else {
+          Swal.fire({
+            title: response.data.message,
+            icon: "error",
+            confirmButtonText: "Close",
+          });
+        }
+      }
+    } catch (error) {
+      setLoading(false);
+      Swal.fire({
+        title: "Failed. Please try after some time!",
+        text: "Could not Delete skill",
+        icon: "error",
+        confirmButtonText: "Close",
+      });
+      console.log("Couldn't delete the record!", error.message);
+    }
+  };
+
+  const handleActivate = async (slug) => {
+    try {
+      const confirmationResult = await Swal.fire({
+        title: "Activate Skill?",
+        text: "Do you want to Activate this Skill?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+      });
+      if (confirmationResult.isConfirmed) {
+        setLoading(true);
+        const response = await axios.post(
+          BaseAPI + `/admin/skills/activate/${slug}`,
+          null, // Pass null as the request body if not required
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer" + " " + token,
+            },
+          }
+        );
+        setLoading(false);
+        if (response.data.status === 200) {
+          Swal.fire({
+            title: "Skill Activated successfully!",
+            icon: "success",
+            confirmButtonText: "Close",
+          });
+          getData();
+        } else {
+          Swal.fire({
+            title: response.data.message,
+            icon: "error",
+            confirmButtonText: "Close",
+          });
+        }
+      }
+    } catch (error) {
+      setLoading(false);
+      Swal.fire({
+        title: "Failed. Please try after some time!",
+        text: "Could not Activate Skill",
+        icon: "error",
+        confirmButtonText: "Close",
+      });
+      console.log("Couldn't activate the record!", error.message);
+    }
+  };
+
+  const handleDeactivate = async (slug) => {
+    try {
+      const confirmationResult = await Swal.fire({
+        title: "Deactivate Skill?",
+        text: "Do you want to Deactivate this Skill?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+      });
+      if (confirmationResult.isConfirmed) {
+        setLoading(true);
+        const response = await axios.post(
+          BaseAPI + `/admin/skills/deactivate/${slug}`,
+          null, // Pass null as the request body if not required
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer" + " " + token,
+            },
+          }
+        );
+        setLoading(false);
+        if (response.data.status === 200) {
+          Swal.fire({
+            title: "Skill Deactivated successfully!",
+            icon: "success",
+            confirmButtonText: "Close",
+          });
+          getData();
+        } else {
+          Swal.fire({
+            title: response.data.message,
+            icon: "error",
+            confirmButtonText: "Close",
+          });
+        }
+      }
+    } catch (error) {
+      setLoading(false);
+      Swal.fire({
+        title: "Failed. Please try after some time!",
+        text: "Could not Deactivate Skill",
+        icon: "error",
+        confirmButtonText: "Close",
+      });
+      console.log("Couldn't deactivate the record!", error.message);
+    }
+  };
+
+  const handleMultipleDeactivate = async () => {
+    try {
+      const confirmationResult = await Swal.fire({
+        title: "Deactivate?",
+        text: "Do you want to Deactivate these skills?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+      });
+      if (confirmationResult.isConfirmed) {
+        const idList = selectedIds.map((id) => id.toString()); // Ensure IDs are strings
+
+        // console.log(idList);
+
+        // console.log(ids)
+        // console.log(checkedData);
+
+        setLoading(true);
+        const response = await axios.post(
+          BaseAPI + "/admin/skills/index",
+          {
+            idList: idList.join(","),
+            action: "deactivate",
+          }, // Pass null as the request body if not required
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer" + " " + token,
+            },
+          }
+        );
+
+        setLoading(false);
+        if (response.data.status === 200) {
+          Swal.fire({
+            title: "Skills Deactivated successfully!",
+            icon: "success",
+            confirmButtonText: "Close",
+          });
+          getData();
+        } else {
+          Swal.fire({
+            title: "Couldn't Deactivate!",
+            icon: "error",
+            confirmButtonText: "Close",
+          });
+        }
+      }
+    } catch (error) {
+      setLoading(false);
+      Swal.fire({
+        title: "Failed. Please try after some time!",
+        text: "Could not Deactivate Skills",
+        icon: "error",
+        confirmButtonText: "Close",
+      });
+      console.log("Couldn't deactivate the record!", error.message);
+    }
+  };
+  const handleMultipleActivate = async () => {
+    try {
+      const confirmationResult = await Swal.fire({
+        title: "Activate?",
+        text: "Do you want to Activate these Skills?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+      });
+      if (confirmationResult.isConfirmed) {
+        const idList = selectedIds.map((id) => id.toString()); // Ensure IDs are strings
+
+        // console.log(ids);
+        setLoading(true);
+        const response = await axios.post(
+          BaseAPI + "/admin/skills/index",
+          {
+            idList: idList.join(","),
+            action: "activate",
+          }, // Pass null as the request body if not required
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer" + " " + token,
+            },
+          }
+        );
+
+        setLoading(false);
+        if (response.data.status === 200) {
+          Swal.fire({
+            title: "Skills Activated successfully!",
+            icon: "success",
+            confirmButtonText: "Close",
+          });
+          getData();
+        } else {
+          Swal.fire({
+            title: "Couldn't Activate!",
+            icon: "error",
+            confirmButtonText: "Close",
+          });
+        }
+      }
+    } catch (error) {
+      setLoading(false);
+      Swal.fire({
+        title: "Failed. Please try after some time!",
+        text: "Could not Activate Skills",
+        icon: "error",
+        confirmButtonText: "Close",
+      });
+      console.log("Couldn't activate the record!", error.message);
+    }
+  };
+  const handleMultipleDelete = async () => {
+    try {
+      const confirmationResult = await Swal.fire({
+        title: "Delete?",
+        text: "Do you want to Delete these Skills?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+      });
+
+      if (confirmationResult.isConfirmed) {
+        const idList = selectedIds.map((id) => id.toString()); // Ensure IDs are strings
+
+        // console.log("IDs to delete:", idList);
+
+        setLoading(true);
+        const response = await axios.post(
+          BaseAPI + "/admin/skills/index",
+          {
+            idList: idList.join(","),
+            action: "delete",
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+
+        // console.log("Response:", response);
+
+        setLoading(false);
+
+        if (response.data.status === 200) {
+          Swal.fire({
+            title: "Skills Deleted successfully!",
+            icon: "success",
+            confirmButtonText: "Close",
+          });
+          getData();
+        } else if (response.data.status === 500) {
+          console.log("Error 500 response:", response.data);
+          Swal.fire({
+            title: response.data.message,
+            text: response.data.system_generated_skills
+              .map((i) => {
+                return i.name + ", ";
+              })
+              .join(""),
+            icon: "warning",
+            confirmButtonText: "Close",
+          });
+        } else {
+          Swal.fire({
+            title: "Couldn't Delete!",
+            icon: "error",
+            confirmButtonText: "Close",
+          });
+        }
+      } else {
+        console.log("Deletion was canceled by the user.");
+      }
+    } catch (error) {
+      setLoading(false);
+      Swal.fire({
+        title: "Failed. Please try after some time!",
+        text: "Could not Delete Skills",
+        icon: "error",
+        confirmButtonText: "Close",
+      });
+      console.log("Couldn't Delete the record!", error.message);
+    }
+  };
+
+  // Search functionality
+
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [skills, setSkills] = useState(null);
+
+  const handleSearch = (e) => {
+    const keyword = e.target.value;
+    setSearchKeyword(keyword);
+
+    // Filter skills based on the keyword
+    const filtered = userData.filter((userData) =>
+      userData.skill_name.toLowerCase().includes(keyword.toLowerCase())
+    );
+    setSkills(filtered);
+    // console.log(filtered);
+  };
+
+  const handleClearFilters = (e) => {
+    e.preventDefault();
+    setSearchKeyword("");
+    setSkills();
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const columns = [
+    {
+      field: "Name",
+      headerName: "Name",
+      width: 300,
+      flex: 1,
+      headerClassName: "redText",
+    },
+    {
+      field: "skill_type",
+      headerName: "Skill Type",
+      width: 240,
+      flex: 1,
+      headerClassName: "redText",
+    },
+    {
+      field: "createdat",
+      headerName: "Created at",
+      width: 340,
+      flex: 1,
+      headerClassName: "redText",
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      headerClassName: "redText",
+      width: 293,
+      flex: 1,
+      renderCell: (params) => (
+        <div className="process__actionnn" style={{ margin: "10px 0px" }}>
+          {params.row.status === 1 ? (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={(e) => {
+                handleDeactivate(params.row.slug);
+                e.stopPropagation(); // Prevents event bubbling
+              }}
+              title="Deactivate Now"
+              className="btn btn-success btn-successss"
+            >
+              <i className="fa-solid fa-check"></i>
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={(e) => {
+                handleActivate(params.row.slug);
+                e.stopPropagation(); // Prevents event bubbling
+              }}
+              title="Activate Now"
+              className="btn btn-danger btn-deactivateee"
+            >
+              <i className="fa-solid fa-ban"></i>
+            </Button>
+          )}
+          {params.row.employer_id !== 0 && userAccess[3]?.Edit === 1 && (
+            <Link
+              href={`skills/edit/${params.row.slug}`}
+              title="Edit"
+              className="btn btn-warning btn-Edittt"
+              onClick={(e) => {
+                e.stopPropagation(); // Prevents event bubbling
+              }}
+            >
+              <i className="fa-solid fa-square-pen"></i>
+            </Link>
+          )}
+          {userAccess[3]?.Delete === 1 && (
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={(e) => {
+                handleDelete(params.row.slug);
+                e.stopPropagation(); // Prevents event bubbling
+              }}
+              title="Delete"
+              className="btn btn-danger btn-Deleteee"
+            >
+              <i className="fa-solid fa-trash-can"></i>
+            </Button>
+          )}
+        </div>
+      ),
+    },
+  ];
+
+  const rows = skills
+    ? skills.map((i) => ({
+        id: i.skill_id,
+        employer_id: i.employer_id,
+        skill_type:
+          i.employer_id === 0
+            ? "System Generated"
+            : i.user_type === "employer"
+            ? "Employer"
+            : "Staff",
+        Name: i.skill_name,
+        createdat: i.created,
+        status: i.status,
+        slug: i.slug,
+      }))
+    : userData.map((item) => ({
+        id: item.skill_id,
+        employer_id: item.employer_id,
+        skill_type:
+          item.employer_id === 0
+            ? "System Generated"
+            : item.user_type === "employer"
+            ? "Employer"
+            : "Staff",
+        Name: item.skill_name,
+        createdat: item.created,
+        status: item.status,
+        slug: item.slug,
+      }));
+
+  return (
+    <>
+      <StaffLayout>
+        {loading && <div className="loader-container"></div>}
+        <div
+          className=" backgroundColour adminChangeUsername "
+          style={{ minHeight: "80vh" }}
+        >
+          <div className="breadCumb1" role="">
+            <div className="flex gap-3 items-center">
+              <Link underline="hover" color="inherit" href="/staff/dashboard">
+                <div className="flex gap-2 items-center">
+                  <i className="fa-solid fa-gauge "></i>
+                  <span>
+                    Dashboard <i class="fa-solid fa-angles-right text-xs"></i>
+                  </span>
+                </div>
+              </Link>
+              <div className="flex gap-2 items-center  ">
+                <i class="fa-solid fa-atom"></i>
+                <span> Skill List</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="">
+            <div className="serachKeyItems  bg-white">
+              <form action="">
+                <p>Search Skill by Skill Name</p>
+                <div className="flex flex-col md:flex-row justify-between items-center w-full md:gap-4">
+                  <div className="w-full flex flex-col md:flex-row items-center gap-2 flex-grow">
+                    <input
+                      type="text"
+                      className="formm-control w-100 md:mb-0"
+                      placeholder="Search By Skill Name"
+                      value={searchKeyword}
+                      onChange={handleSearch}
+                    />
+
+                    <button
+                      className="btn btn-clearFilters"
+                      onClick={handleClearFilters}
+                    >
+                      Clear Filters
+                    </button>
+                  </div>
+                  {userAccess[3]?.Add === 1 && (
+                    <div className="add__interviewwww">
+                      <Link
+                        href="/staff/skills/addskills"
+                        className="btn btn-Category-add"
+                      >
+                        Add Skill
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </form>
+            </div>
+
+            <div className="interviewPreviewTable">
+              <div style={{ height: 400, width: "100%" }}>
+                {/* <DataGrid
+                  rows={rows}
+                  columns={columns}
+                  initialState={{
+                    pagination: {
+                      paginationModel: { page: 0, pageSize: 5 },
+                    },
+                  }}
+                  pageSizeOptions={[5, 10]}
+                  checkboxSelection
+                /> */}
+                <DataGrid
+                  rows={rows}
+                  columns={columns}
+                  initialState={{
+                    pagination: {
+                      paginationModel: { page: 0, pageSize: 5 },
+                    },
+                  }}
+                  pageSizeOptions={[5, 10]}
+                  checkboxSelection
+                  onRowSelectionModelChange={(newRowSelectionModel) => {
+                    setSelectedIds(newRowSelectionModel);
+                    // console.log(selectedIds);
+                    // console.log("object")
+                  }}
+                  rowSelectionModel={selectedIds}
+                  {...userData}
+                  isRowSelectable={(params) => params.row.employer_id !== 0}
+                />
+              </div>
+              <div className="BottomButtom">
+                <button
+                  className="btn btn-dark btn-Activateee"
+                  onClick={() => handleMultipleActivate()}
+                >
+                  Activate
+                </button>
+                <button
+                  className="btn btn-dark btn-Activateee"
+                  onClick={() => handleMultipleDeactivate()}
+                >
+                  Deactivate
+                </button>
+                <button
+                  className="btn btn-dark btn-Activateee"
+                  onClick={() => handleMultipleDelete()}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <AdminFooter />
+      </StaffLayout>
+    </>
+  );
+};
+
+export default Page;

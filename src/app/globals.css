@@ -1,0 +1,232 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+} */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+a {
+  color: inherit;
+  text-decoration: none !important;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+::selection{background: #ef4030;color: #fff;}
+
+
+/*  */
+
+/* styles/global.css */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.modal-order{
+  order:9999;
+}
+.blog-description h1, .blog-description h2, .blog-description h3, .blog-description h4, .blog-description h5, .blog-description h6{
+    padding-bottom: 10px;
+}
+.blog-description h1{
+  font-size: 36px;
+}
+.blog-description h2{
+  font-size: 30px;
+}
+.blog-description h3{
+  font-size: 24px;
+}
+.blog-description h4{
+  font-size: 20px;
+}
+.blog-description h5{
+  font-size: 16px;
+}
+.blog-description h6{
+  font-size: 14px;
+}
+.blog-description a{
+  color: blue;
+}
+.blog-description ul{
+  list-style-type: disc;
+  padding-left: 24px;
+}
+.blog-description ol{
+  list-style-type: decimal;
+  padding-left: 24px;
+}
+.blog-description ol li::marker{
+  font-weight: 700;
+  font-size: 16px;
+}
+.blog-description p{
+  font-size: 16px;
+    padding-bottom: 10px;
+}
+.blog-description li h4 {
+  font-size: 16px;
+  font-weight: normal;
+}
+.recaptcha-css{
+    scale: 0.75;
+    margin-left: -98px;
+}
+
+.subscriberecaptcha{
+  margin-top: -5px;
+}
+
+.blogcomment{
+  margin-top: -4px;
+}
+.messagecomment{
+  margin-top: -7px;
+}
+.accordion-button:not(.collapsed) {
+    color: #0c63e4;
+    background-color: #ffffff;
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .125);
+}
+.rotated-icon {
+    transform: rotate(90deg);
+  }
+
+  .custom-class {
+    background-color: #16384D;
+    
+  }
+  .custom-class1 {
+    background-color: #1A2632;
+  }
+  
+  @keyframes moveHorizontally {
+    0% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(20px); 
+      }
+      100% {
+        transform: translateX(0); 
+      }
+  }
+  
+  .div-horizontal {
+    animation: moveHorizontally 3s ease-in-out infinite; 
+  }
+  
+
+  @keyframes moveVertically {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px); 
+    }
+    100% {
+      transform: translateY(0); 
+    }
+  }
+  
+  .div-vertical {
+    animation: moveVertically 3s ease-in-out infinite; 
+  }
+  /* Bounce animation for the headline */
+@keyframes bounceIn {
+    0% {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    60% {
+      transform: translateY(10px);
+      opacity: 1;
+    }
+    80% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUpFadeIn {
+    0% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Apply animation classes */
+  .animate-bounceIn {
+    animation: bounceIn 4s ease-out infinite;
+  }
+  
+  .animate-fadeInUp {
+    animation: fadeInUp 4.5s ease-out infinite;
+  }
+  
+  .animate-slideUpFadeIn {
+    animation: slideUpFadeIn 3s ease-out infinite;
+  }
+  .custom-list li::marker {
+    color: gray; 
+  }
+
+ 
+  @media (min-width: 1024px) {
+    .modal-order {
+        order: -9999;
+    }
+}
