@@ -70,6 +70,7 @@ const Page = () => {
             message: "",
             isRobot: false,
           });
+
         }
       } catch (error) {
         setLoading(false);
@@ -128,7 +129,7 @@ const Page = () => {
                     Name <span className="text-red-500">*</span>
                   </label>
                   <input
-                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#87e0ff] ${
                       errors.name ? "border-red-500" : ""
                     }`}
                     type="text"
@@ -149,7 +150,7 @@ const Page = () => {
                     Email <span className="text-red-500">*</span>
                   </label>
                   <input
-                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#87e0ff] ${
                       errors.email ? "border-red-500" : ""
                     }`}
                     type="email"
@@ -171,7 +172,7 @@ const Page = () => {
                   Message <span className="text-red-500">*</span>
                 </label>
                 <textarea
-                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#87e0ff] ${
                     errors.message ? "border-red-500" : ""
                   }`}
                   id="message"
@@ -198,7 +199,7 @@ const Page = () => {
               </div>
               <div className="flex justify-start">
                 <button
-                  className="bg-blue-500 text-white text-lg px-6 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="bg-[#27BAEE] text-white text-lg px-6 py-2 rounded hover:bg-[#209cc8] focus:outline-none focus:ring-2 focus:ring-[#27BAEE]"
                   onClick={handleSubmit}
                 >
                   SUBMIT

@@ -57,21 +57,21 @@ const Page = () => {
 
                 <div className="space-y-4">
                   <div className="flex items-start">
-                    <span className="text-black text-lg mt-1"><SiTicktick /></span>
+                    <span className="text-black text-lg mt-1"><SiTicktick className="text-[#27BAEE]" /></span>
                     <p className="ml-2 text-gray-700">
                       <span className="font-bold">Flexible & Scalable</span> – Select the right plan for you with customizable options and add-ons.
                     </p>
                   </div>
 
                   <div className="flex items-start">
-                    <span className="text-black text-lg mt-1"><SiTicktick /></span>
+                    <span className="text-black text-lg mt-1"><SiTicktick className="text-[#27BAEE]" /></span>
                     <p className="ml-2 text-gray-700">
                       <span className="font-bold">No Hidden Fees</span> – Pay one low price (<span className="font-bold">$45 USD</span>) per month, cancel anytime.
                     </p>
                   </div>
 
                   <div className="flex items-start">
-                    <span className="text-black text-lg mt-1"><SiTicktick /></span>
+                    <span className="text-black text-lg mt-1"><SiTicktick className="text-[#27BAEE]" /></span>
                     <p className="ml-2 text-gray-700">
                       <span className="font-bold">Powerful Features</span> – Everything you need for seamless hiring in one platform.
                     </p>
@@ -110,12 +110,12 @@ const Page = () => {
             </div>
 
             {/* ===== RIGHT SIDE PRICING CARD ===== */}
-            <div className="col-span-full lg:col-span-2 flex flex-col bg-white rounded-lg border border-2 border-blue-900 shadow-md shadow-blue-300 w-full hover:shadow-xl">
+            <div className="col-span-full lg:col-span-2 flex flex-col bg-white rounded-lg border border-2 border-[#27BAEE] shadow-md shadow-blue-300 w-full hover:shadow-xl">
               
               <div className="px-6 pb-3 items-center mb-4 border-b-2 border-b-gray-300">
                 <h2 className="text-xl font-bold mt-4 mb-2">ATSWAY Membership Plan</h2>
                 <p>
-                  Whether you’re hiring your first team members or expanding your recruitment efforts, this plan is made for you.
+                  Whether you&apos;re hiring your first team members or expanding your recruitment efforts, this plan is made for you.
                 </p>
               </div>
 
@@ -125,7 +125,7 @@ const Page = () => {
                     src="/Images/home/phone_pricing.png"
                     width={50}
                     height={50}
-                    className="bg-blue-600 p-2 rounded-full"
+                    className="bg-[#27BAEE] p-2 rounded-full"
                     alt="pricing icon"
                   />
                   <h2 className="text-2xl font-bold mt-2">Core Plan</h2>
@@ -155,7 +155,7 @@ const Page = () => {
 
               <Link
                 href="/contact-us"
-                className="bg-blue-500 text-white self-center w-auto px-4 py-2 rounded-full font-bold"
+                className="bg-[#27BAEE] text-white self-center w-auto px-4 py-2 rounded-full font-bold"
               >
                 Get Started
               </Link>
@@ -171,7 +171,7 @@ const Page = () => {
                   "Reports & Analytics",
                 ].map((item, index) => (
                   <li key={index} className="flex items-center">
-                   <SiTicktick /><span className="ml-1.5">{item}</span>
+                   <SiTicktick className="text-[#27BAEE]" /><span className="ml-1.5">{item}</span>
                   </li>
                 ))}
               </ul>

@@ -166,7 +166,7 @@ const handleRegister = async ({
                     name="first_name"
                     type="text"
                     placeholder="First name"
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-300"
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:border-[#87e0ff] focus:ring-2 focus:ring-[#87e0ff]"
                   />
                   {errors.first_name && touched.first_name && (
                     <p className="text-xs text-red-600 mt-1">{errors.first_name}</p>
@@ -177,7 +177,7 @@ const handleRegister = async ({
                     name="last_name"
                     type="text"
                     placeholder="Last name"
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-300"
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:border-[#87e0ff] focus:ring-2 focus:ring-[#87e0ff]"
                   />
                   {errors.last_name && touched.last_name && (
                     <p className="text-xs text-red-600 mt-1">{errors.last_name}</p>
@@ -190,7 +190,7 @@ const handleRegister = async ({
                     name="email"
                     type="email"
                     placeholder="Email address"
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-300"
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:border-[#87e0ff] focus:ring-2 focus:ring-[#87e0ff]"
                   />
                   {errors.email && touched.email && (
                     <p className="text-xs text-red-600 mt-1">{errors.email}</p>
@@ -203,7 +203,7 @@ const handleRegister = async ({
                     name="contact_number"
                     type="text"
                     placeholder="Contact number"
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-300"
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:border-[#87e0ff] focus:ring-2 focus:ring-[#87e0ff]"
                   />
                   {errors.contact_number && touched.contact_number && (
                     <p className="text-xs text-red-600 mt-1">{errors.contact_number}</p>
@@ -216,7 +216,7 @@ const handleRegister = async ({
                     name="password"
                     type="password"
                     placeholder="Password"
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-300"
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:border-[#87e0ff] focus:ring-2 focus:ring-[#87e0ff]"
                   />
                   {errors.password && touched.password && (
                     <p className="text-xs text-red-600 mt-1">
@@ -231,7 +231,7 @@ const handleRegister = async ({
                     name="confirmPassword"
                     type="password"
                     placeholder="Confirm Password"
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-300"
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:border-[#87e0ff] focus:ring-2 focus:ring-[#87e0ff]"
                   />
                   {errors.confirmPassword && touched.confirmPassword && (
                     <p className="text-xs text-red-600 mt-1">
@@ -244,7 +244,7 @@ const handleRegister = async ({
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`w-full py-2 px-4 bg-indigo-600 text-white text-sm font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition ${
+                  className={`w-full py-2 px-4 bg-[#27BAEE] text-white text-sm font-medium rounded-md hover:bg-[#209cc8] focus:outline-none focus:ring-2 focus:ring-[#27BAEE] transition ${
                     loading ? "opacity-70 cursor-not-allowed" : ""
                   }`}
                 >
@@ -255,7 +255,7 @@ const handleRegister = async ({
                 <button
                   type="button"
                   onClick={() => router.push("/candidate-panel/login")}
-                  className="mt-4 w-full py-2 px-4 border border-gray-300 text-sm font-medium rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                  className="mt-4 w-full py-2 px-4 border border-gray-300 text-sm font-medium rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#87e0ff] transition"
                 >
                   Already have an account? Login
                 </button>

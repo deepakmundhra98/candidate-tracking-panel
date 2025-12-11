@@ -31,22 +31,19 @@ export default function Header() {
   }, []);
 
   const isActive = (path) => {
-    if (path === "/" && pathname === "/") return "text-black";
+    if (path === "/" && pathname === "/") return "text-[#27BAEE]";
 
-    if (path === "/blog" && pathname.startsWith("/blog"))
-      return "text-black";
+    if (path === "/blog" && pathname.startsWith("/blog")) return "text-[#27BAEE]";
 
-    return pathname === path ? "text-black" : "text-gray-500";
+    return pathname === path ? "text-[#27BAEE]" : "text-gray-500";
   };
 
   return (
     <div className="border-b">
       <div className="container mx-auto">
         <div className="flex items-center justify-between h-12 bg-white font-bold text-black my-4 px-4 sm:px-6 lg:px-8">
-          
           {/* LEFT SIDE */}
           <div className="flex items-center space-x-16">
-
             {/* LOGO */}
             <div className="flex items-center space-x-4 sm:space-x-6">
               <Link href="/">
@@ -62,49 +59,65 @@ export default function Header() {
 
             {/* DESKTOP MENU */}
             <div className="hidden lg:flex items-center space-x-6 md:space-x-8">
-
               <Link href="/" className="text-sm">
-                <div className={`flex text-lg hover:text-black ${isActive("/")}`}>
+                <div
+                  className={`flex text-lg hover:text-[#27BAEE] ${isActive("/")}`}
+                >
                   Home
                 </div>
               </Link>
 
               <Link href="/hrms" className="text-sm">
-                <div className={`flex text-lg hover:text-black ${isActive("/hrms")}`}>
+                <div
+                  className={`flex text-lg hover:text-[#27BAEE] ${isActive(
+                    "/hrms"
+                  )}`}
+                >
                   HRMS
                 </div>
               </Link>
 
               <Link href="/contact-us" className="text-sm">
-                <div className={`flex text-lg hover:text-black ${isActive("/contact-us")}`}>
+                <div
+                  className={`flex text-lg hover:text-[#27BAEE] ${isActive(
+                    "/contact-us"
+                  )}`}
+                >
                   Contact Us
                 </div>
               </Link>
 
               <Link href="/blog" className="text-sm">
-                <div className={`flex text-lg hover:text-black ${isActive("/blog")}`}>
+                <div
+                  className={`flex text-lg hover:text-[#27BAEE] ${isActive(
+                    "/blog"
+                  )}`}
+                >
                   Blog
                 </div>
               </Link>
 
               <Link href="/pricing" className="text-sm">
-                <div className={`flex text-lg hover:text-black ${isActive("/pricing")}`}>
+                <div
+                  className={`flex text-lg hover:text-[#27BAEE] ${isActive(
+                    "/pricing"
+                  )}`}
+                >
                   Pricing
                 </div>
               </Link>
-
             </div>
           </div>
 
-<div className="hidden lg:flex items-center space-x-6 md:space-x-8">
-          {/* REQUEST DEMO BUTTON */}
-          <Link
-            href="/candidate-panel/login"
-            className="hidden lg:flex bg-blue-600 font-medium text-white px-4 py-2 rounded"
-          >
-            Candidate Login
-          </Link>
-          {/* <button
+          <div className="hidden lg:flex items-center space-x-6 md:space-x-8">
+            {/* REQUEST DEMO BUTTON */}
+            <Link
+              href="/candidate-panel/login"
+              className="hidden lg:flex bg-[#27BAEE] font-medium text-white px-4 py-2 rounded"
+            >
+              Candidate Login
+            </Link>
+            {/* <button
             onClick={() => setIsModalOpen(true)}
             className="hidden lg:flex bg-blue-600 font-medium text-white px-4 py-2 rounded"
           >
@@ -130,41 +143,64 @@ export default function Header() {
         {/* MOBILE MENU */}
         {isMenuOpen && (
           <div className="lg:hidden flex flex-col gap-3 bg-white py-4 px-4 sm:px-6 lg:px-8">
-
-            <Link href="/" className={`text-md font-medium text-center hover:text-black ${isActive("/")}`}>
+            <Link
+              href="/"
+              className={`text-md font-medium text-center hover:text-black ${isActive(
+                "/"
+              )}`}
+            >
               Home
             </Link>
 
-            <Link href="/hrms" className={`text-md font-medium text-center hover:text-black ${isActive("/hrms")}`}>
+            <Link
+              href="/hrms"
+              className={`text-md font-medium text-center hover:text-black ${isActive(
+                "/hrms"
+              )}`}
+            >
               HRMS
             </Link>
 
-            <Link href="/contact-us" className={`text-md font-medium text-center hover:text-black ${isActive("/contact-us")}`}>
+            <Link
+              href="/contact-us"
+              className={`text-md font-medium text-center hover:text-black ${isActive(
+                "/contact-us"
+              )}`}
+            >
               Contact Us
             </Link>
 
-            <Link href="/hr-blog" className={`text-md font-medium text-center hover:text-black ${isActive("/hr-blog")}`}>
+            <Link
+              href="/hr-blog"
+              className={`text-md font-medium text-center hover:text-black ${isActive(
+                "/hr-blog"
+              )}`}
+            >
               Blog
             </Link>
 
-            <Link href="/pricing" className={`text-md font-medium text-center hover:text-black ${isActive("/pricing")}`}>
+            <Link
+              href="/pricing"
+              className={`text-md font-medium text-center hover:text-black ${isActive(
+                "/pricing"
+              )}`}
+            >
               Pricing
             </Link>
 
             <Link
-            href="/candidate-panel/login"
-            className="bg-blue-600 text-center text-white px-4 py-2 rounded"
-          >
-            Candidate Login
-          </Link>
+              href="/candidate-panel/login"
+              className="bg-[#27BAEE] text-center text-white px-4 py-2 rounded"
+            >
+              Candidate Login
+            </Link>
 
-            <button
+            {/* <button
               onClick={() => setIsModalOpen(true)}
               className="bg-blue-600 text-white px-4 py-2 rounded"
             >
               Request a Demo
-            </button>
-
+            </button> */}
           </div>
         )}
       </div>

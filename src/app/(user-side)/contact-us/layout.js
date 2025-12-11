@@ -14,6 +14,10 @@ export const metadata = {
   alternates: {
     canonical: Domain + "/contact-us",
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }) {

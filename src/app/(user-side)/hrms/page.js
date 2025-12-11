@@ -35,12 +35,12 @@ export default function Page() {
               handling payroll to managing recruitment and analyzing employee
               data, it's all right here.
             </p>
-            <button
+            {/* <button
               onClick={() => setIsModalOpen(true)}
               className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
             >
               Book a Demo
-            </button>
+            </button> */}
           </div>
 
           <div className="lg:w-1/2">

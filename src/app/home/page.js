@@ -17,8 +17,7 @@ const Page = () => {
     getData();
   }, []);
 
-
-    const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState(null);
 
   const toggle = (i) => {
     setOpenIndex(openIndex === i ? null : i);
@@ -58,22 +57,17 @@ const Page = () => {
     },
   ];
 
-
   const getData = async () => {
     try {
-      const response = await axios.get(
-        BaseAPI + "/blog/listing"
-      );
+      const response = await axios.get(BaseAPI + "/blog/listing");
       setBlogData(response.data.response.blogData);
     } catch (error) {
       console.error(error);
     }
   };
 
-
   return (
     <>
-      
       <div className="bg-white !py-2 lg:py-0">
         <div className="container mx-auto my-12 ">
           <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4 px-4 sm:px-6 lg:px-8">
@@ -93,16 +87,18 @@ const Page = () => {
                 handle essential HR tasks like payroll and attendance
                 management—all in one place.
               </p>
-              {/* <button
-                onClick={() => setIsModalOpen(true)}
-                className="bg-blue-600 font-medium text-white px-6 py-3 rounded self-start"
+              <Link
+                href="/candidate-panel/build-resume"
+                className="bg-[#27BAEE] font-medium text-white px-6 py-3 rounded self-start"
               >
-                Request a Demo
-              </button> */}
+                Build Your Resume Now
+              </Link>
             </div>
             <div className="md:w-1/2 md:h-full flex justify-center md:justify-end mt-8 md:mt-0">
-              <img
-                src="../Images/home/banner.png"
+              <Image
+                width={500}
+                height={400}
+                src="/Images/home/banner.png"
                 alt="Banner"
                 className="size-3/4 div-vertical"
               />
@@ -137,7 +133,9 @@ const Page = () => {
                 </p>
               </div>
               <div className="md:w-1/2 flex justify-center md:justify-end mt-8 md:mt-0">
-                <img
+                <Image
+                  width={400}
+                  height={400}
                   src="/Images/home/image3.png"
                   alt="Hero"
                   className="rounded-full"
@@ -238,28 +236,32 @@ const Page = () => {
           </div>
         </div>
         <div className="my-12 custom-class">
-          <div class="container mx-auto px-4 sm:px-6 lg:px-8 p-0 flex flex-col-reverse md:flex-row justify-between items-center ">
-            <div className="h-full">
-              <img
+          <div className="px-0 gap-4 sm:px-0 lg:px-0 p-0 flex flex-col-reverse md:flex-row items-center">
+            {/* LEFT SECTION — IMAGE */}
+            <div className="md:w-1/2 w-full h-full">
+              <Image
+                width={800}
+                height={400}
                 src="/Images/home/Mask group.png"
                 alt="Hero"
-                className="h-full"
+                className="h-full w-full object-cover"
               />
             </div>
 
-            <div className="md:w-1/2 bg-[#16384D] text-left md:text-left p-6 flex flex-col">
+            {/* RIGHT SECTION — CONTENT */}
+            <div className="md:w-1/2 w-full bg-[#16384D] text-left p-6 flex flex-col">
               <h2 className="text-3xl text-white font-bold mb-4">
                 The Future of Applicant Tracking Systems (ATS)
               </h2>
+
               <p className="mb-6 text-white">
                 As technology advances, ATS will become smarter and more
                 efficient, benefiting both employers and job seekers.
               </p>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <div>
-                    <FiCheckCircle className="text-white text-xl mr-1" />
-                  </div>
+
+              <ul className="space-y-6">
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-white text-2xl flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-bold text-white">AI-Powered Hiring:</h3>
                     <p className="text-white">
@@ -269,10 +271,9 @@ const Page = () => {
                     </p>
                   </div>
                 </li>
-                <li className="flex items-start">
-                  <div>
-                    <FiCheckCircle className="text-white text-xl mr-1" />
-                  </div>
+
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-white text-2xl flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-bold text-white">Video Resumes:</h3>
                     <p className="text-white">
@@ -282,10 +283,9 @@ const Page = () => {
                     </p>
                   </div>
                 </li>
-                <li className="flex items-start">
-                  <div>
-                    <FiCheckCircle className="text-white text-xl mr-1" />
-                  </div>
+
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-white text-2xl flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-bold text-white">
                       Better Candidate Experience:
@@ -298,12 +298,6 @@ const Page = () => {
                   </div>
                 </li>
               </ul>
-              {/* <button
-                onClick={() => setIsModalOpen(true)}
-                className="mt-6 ml-6 px-2.5 w-40 py-2 bg-white text-black font-bold rounded-lg shadow-lg hover:bg-gray-400"
-              >
-                See it in action
-              </button> */}
             </div>
           </div>
         </div>
@@ -378,10 +372,10 @@ const Page = () => {
                 slidesPerView: 3,
                 spaceBetween: 30,
               },
-             
+
               768: {
-                slidesPerView: 2, 
-                spaceBetween: 20, 
+                slidesPerView: 2,
+                spaceBetween: 20,
               },
 
               0: {
@@ -611,54 +605,55 @@ const Page = () => {
           </div>
         </section> */}
 
-            <section
-      className="bg-cover bg-center h-[700px]"
-      style={{ backgroundImage: "url('/Images/home/banner2.png')" }}
-    >
-      <div className="container mx-auto pt-10">
-        {/* Heading */}
-        <div className="text-center text-black font-bolder text-3xl px-4 py-6">
-          <h2>Frequently Asked Questions</h2>
-        </div>
+        <section
+          className="bg-cover bg-center h-[700px]"
+          style={{ backgroundImage: "url('/Images/home/banner2.png')" }}
+        >
+          <div className="container mx-auto pt-10">
+            {/* Heading */}
+            <div className="text-center text-black font-bolder text-3xl px-4 py-6">
+              <h2>Frequently Asked Questions</h2>
+            </div>
 
-        <div className="flex flex-col-reverse lg:flex-row gap-4 px-4 py-6">
+            <div className="flex flex-col-reverse lg:flex-row gap-4 px-4 py-6">
+              {/* Accordion Left */}
+              <div className="bg-white px-4 h-full pb-3 lg:w-1/2 text-center lg:text-left rounded-md">
+                {faqData.map((item, i) => (
+                  <div key={i} className="border-b border-gray-300 py-3">
+                    <button
+                      className="w-full flex justify-between items-center text-left text-lg font-bold"
+                      onClick={() => toggle(i)}
+                    >
+                      {item.q}
+                      <span className="text-xl">
+                        {openIndex === i ? "−" : "+"}
+                      </span>
+                    </button>
 
-          {/* Accordion Left */}
-          <div className="bg-white px-4 h-full pb-3 lg:w-1/2 text-center lg:text-left rounded-md">
-            {faqData.map((item, i) => (
-              <div key={i} className="border-b border-gray-300 py-3">
-                <button
-                  className="w-full flex justify-between items-center text-left text-lg font-bold"
-                  onClick={() => toggle(i)}
-                >
-                  {item.q}
-                  <span className="text-xl">{openIndex === i ? "−" : "+"}</span>
-                </button>
-
-                <div
-                  className={`transition-all overflow-hidden ${
-                    openIndex === i ? "max-h-60 mt-2" : "max-h-0"
-                  }`}
-                >
-                  <div className="text-gray-700 text-left">{item.a}</div>
-                </div>
+                    <div
+                      className={`transition-all overflow-hidden ${
+                        openIndex === i ? "max-h-60 mt-2" : "max-h-0"
+                      }`}
+                    >
+                      <div className="text-gray-700 text-left">{item.a}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
 
-          {/* Right Image */}
-          <div className="lg:w-1/2 flex justify-center lg:justify-center">
-            <Image
-              src="/Images/home/faq.png"
-              width={500}
-              height={400}
-              alt="FAQ"
-              className="rounded-sm"
-            />
+              {/* Right Image */}
+              <div className="lg:w-1/2 flex justify-center lg:justify-center">
+                <Image
+                  src="/Images/home/faq.png"
+                  width={500}
+                  height={400}
+                  alt="FAQ"
+                  className="rounded-sm"
+                />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
         <div className="my-12 py-12">
           <div className="container mx-auto rounded-lg border border-gray-300 p-4 bg-gray-100 w-3/4">

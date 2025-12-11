@@ -14,6 +14,10 @@ export const metadata = {
   alternates: {
     canonical: Domain + "/pricing",
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }) {

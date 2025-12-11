@@ -34,7 +34,7 @@ export default function Footer() {
   const isActive = (path) => {
     if (path === "/" && pathname === "/") return "text-black";
 
-    if (path === "/hr-blog" && pathname.startsWith("/hr-blog"))
+    if (path === "/blog" && pathname.startsWith("/hr-blog"))
       return "text-black";
 
     return pathname === path ? "text-black" : "text-gray-500";
@@ -44,7 +44,6 @@ export default function Footer() {
     <footer className="bg-gray-200 text-white py-8">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 text-center sm:text-left px-4 sm:px-6 lg:px-8">
-          
           {/* Logo */}
           <div className="flex items-center space-x-4 sm:space-x-6">
             <Link href="/">
@@ -133,46 +132,51 @@ export default function Footer() {
               Connect with us
             </h3>
 
-            <div className="flex flex-row items-start justify-start gap-4 text-black">
-              <a
-                href={data.facebook_link}
-                className="text-black hover:text-gray-600 transition-colors duration-300"
+            <div className="flex flex-row items-center gap-4 text-black">
+              <Link
+                href={data.facebook_link || "javascript:void(0);"}
                 target="_blank"
+                rel="noopener noreferrer"
+                className="text-black cursor-pointer hover:text-[#27BAEE] transition duration-300"
               >
-                <FaFacebookF />
-              </a>
+                <FaFacebookF className="text-[22px]" />
+              </Link>
 
-              <a
-                href={data.twitter_link}
-                className="text-black hover:text-gray-600 transition-colors duration-300"
+              <Link
+                href={data.twitter_link || "javascript:void(0);"}
                 target="_blank"
+                rel="noopener noreferrer"
+                className="text-black cursor-pointer hover:text-[#27BAEE] transition duration-300"
               >
-                <FaXTwitter />
-              </a>
+                <FaXTwitter className="text-[22px]" />
+              </Link>
 
-              <a
-                href={data.instagram_link}
-                className="text-black hover:text-gray-600 transition-colors duration-300"
+              <Link
+                href={data.instagram_link || "javascript:void(0);"}
                 target="_blank"
+                rel="noopener noreferrer"
+                className="text-black cursor-pointer hover:text-[#27BAEE] transition duration-300"
               >
-                <FaInstagram />
-              </a>
+                <FaInstagram className="text-[22px]" />
+              </Link>
 
-              <a
-                href={data.linkedin_link}
-                className="text-black hover:text-gray-600 transition-colors duration-300"
+              <Link
+                href={data.linkedin_link || "javascript:void(0);"}
                 target="_blank"
+                rel="noopener noreferrer"
+                className="text-black cursor-pointer hover:text-[#27BAEE] transition duration-300"
               >
-                <FiLinkedin />
-              </a>
+                <FiLinkedin className="text-[22px]" />
+              </Link>
 
-              <a
-                href={data.pinterest_link}
-                className="text-black hover:text-gray-600 transition-colors duration-300"
+              <Link
+                href={data.pinterest_link || "javascript:void(0);"}
                 target="_blank"
+                rel="noopener noreferrer"
+                className="text-black cursor-pointer hover:text-[#27BAEE] transition duration-300"
               >
-                <FaPinterest />
-              </a>
+                <FaPinterest className="text-[22px]" />
+              </Link>
             </div>
           </div>
         </div>

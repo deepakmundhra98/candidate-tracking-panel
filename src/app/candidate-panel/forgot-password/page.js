@@ -131,7 +131,7 @@ export default function Page() {
                     type="email"
                     placeholder="Enter your email"
                     required
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-900 bg-white focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-300"
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-900 bg-white focus:outline-none focus:border-[#87e0ff] focus:ring-2 focus:ring-[#87e0ff]"
                   />
                   {errors.email && touched.email && (
                     <p className="text-xs text-red-600 mt-1">{errors.email}</p>
@@ -142,7 +142,7 @@ export default function Page() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`w-full py-2 px-4 bg-indigo-600 text-white text-sm font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition ${
+                  className={`w-full py-2 px-4 bg-[#27BAEE] text-white text-sm font-medium rounded-md hover:bg-[#209cc8]focus:outline-none focus:ring-2 focus:ring-[#27BAEE] transition ${
                     loading ? "opacity-70 cursor-not-allowed" : ""
                   }`}
                 >
@@ -153,7 +153,7 @@ export default function Page() {
                 <button
                   type="button"
                   onClick={() => router.push("/candidate-panel/login")}
-                  className="mt-4 w-full py-2 px-4 border border-gray-300 text-sm font-medium rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                  className="mt-4 w-full py-2 px-4 border border-gray-300 text-sm font-medium rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#87e0ff] transition"
                 >
                   Back to login
                 </button>
