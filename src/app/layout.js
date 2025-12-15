@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import QueryClientWrapper from "./QueryClientWrapper";
 import Domain from "./Domain/Domain";
+import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -136,7 +137,9 @@ export default function RootLayout({ children }) {
       </head>
 
       <body className={inter.className}>
+        <Providers>
         <QueryClientWrapper>{children}</QueryClientWrapper>
+        </Providers>
       </body>
     </html>
   );

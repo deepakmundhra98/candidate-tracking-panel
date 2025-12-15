@@ -5,13 +5,13 @@ export const metadata = {
   keywords:
     "applicant tracking system, ats software, applicant tracking software, best applicant tracking software, applicant tracking software for recruiters",
   alternates: {
-    canonical: "https://atsway.com/hr-blog",
+    canonical: "https://atsway.com/blog",
   },
   openGraph: {
     title: "ATS & Recruitment Insights Blog | Latest Hiring Trends & Tips",
     description:
       "Stay ahead in recruitment with expert insights on ATS software, hiring trends, and recruiter tips.",
-    url: "https://atsway.com/hr-blog",
+    url: "https://atsway.com/blog",
     type: "website",
     images: [
       {

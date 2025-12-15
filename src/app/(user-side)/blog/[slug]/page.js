@@ -235,7 +235,7 @@ const Page = ({ params }) => {
                         .trim()
                         .toLowerCase()
                         .replace(/\s+/g, "-")}`}
-                      className="text-blue-600 ml-1"
+                      className="text-[#27baee] hover:text-[#209cc8] ml-1"
                     >
                       {cat.trim()}
                     </Link>
@@ -392,7 +392,7 @@ const Page = ({ params }) => {
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full px-3 py-2 border rounded-md"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#27baee]"
                 />
                 <FaSearch className="absolute right-3 top-2/4 -translate-y-1/2 text-gray-400" />
               </div>
@@ -407,7 +407,7 @@ const Page = ({ params }) => {
                     <IoIosArrowForward />
                     <Link
                       href={`/blog/category/${cat.slug}`}
-                      className="text-blue-600"
+                      className="text-[#27baee] hover:text-[#209cc8]"
                     >
                       {cat.name}
                     </Link>
@@ -423,7 +423,7 @@ const Page = ({ params }) => {
               </p>
 
               <input
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#27baee]"
                 placeholder="Enter email"
                 value={subscribeForm.email}
                 onChange={(e) =>
@@ -448,7 +448,7 @@ const Page = ({ params }) => {
               </div>
 
               <button
-                className="w-full mt-3 py-2 bg-blue-600 text-white rounded-md"
+                className="w-full mt-3 py-2 bg-[#27baee] hover:bg-[#209cc8] text-white rounded-md"
                 onClick={handleSubscribe}
               >
                 SUBSCRIBE
@@ -464,7 +464,7 @@ const Page = ({ params }) => {
                     <IoIosArrowForward />
                     <Link
                       href={`/blog/${r.slug}`}
-                      className="text-blue-600"
+                      className="text-[#27baee] hover:text-[#209cc8]"
                     >
                       {r.subject}
                     </Link>

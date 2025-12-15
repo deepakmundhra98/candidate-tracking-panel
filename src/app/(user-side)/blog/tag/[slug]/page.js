@@ -71,7 +71,7 @@ const Page = ({ params }) => {
       setFilteredBlogs(filtered);
     } catch (error) {
       console.log(error);
-      router.push("/hr-blog");
+      router.push("/blog");
     } finally {
       setLoading(false);
     }
@@ -173,7 +173,7 @@ const Page = ({ params }) => {
     <>
     <Header />
       {/* Banner */}
-      <div className="bg-blue-600 py-6 mb-6">
+      <div className="bg-[#27baee] py-6 mb-6">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl text-white font-bold">
             Blog Tag: {slug.replace(/-/g, " ").toUpperCase()}
@@ -199,8 +199,8 @@ const Page = ({ params }) => {
                 >
                   <h2 className="text-xl font-semibold">
                     <Link
-                      href={`/hr-blog/${blog.slug}`}
-                      className="text-blue-600 hover:underline"
+                      href={`/blog/${blog.slug}`}
+                      className="text-[#27baee] hover:text-[#209cc8] hover:underline"
                     >
                       {blog.subject}
                     </Link>
@@ -211,11 +211,11 @@ const Page = ({ params }) => {
                     {blog.category_names.split(",").map((cat, i) => (
                       <Link
                         key={i}
-                        href={`/hr-blog/category/${cat
+                        href={`/blog/category/${cat
                           .trim()
                           .toLowerCase()
                           .replace(/\s+/g, "-")}`}
-                        className="text-blue-500 ml-1"
+                        className="text-[#27baee] hover:text-[#209cc8] ml-1"
                       >
                         {cat.trim()}
                       </Link>
@@ -227,10 +227,10 @@ const Page = ({ params }) => {
                     {blog.tags.split(",").map((tag, i) => (
                       <Link
                         key={i}
-                        href={`/hr-blog/tag/${tag
+                        href={`/blog/tag/${tag
                           .trim()
                           .replace(/\s+/g, "-")}`}
-                        className="text-blue-600"
+                        className="text-[#27baee] hover:text-[#209cc8]"
                       >
                         {tag.trim()}
                         {i < blog.tags.split(",").length - 1 ? ", " : ""}
@@ -259,8 +259,8 @@ const Page = ({ params }) => {
                   </div>
 
                   <Link
-                    href={`/hr-blog/${blog.slug}`}
-                    className="text-blue-500 mt-3 inline-block"
+                    href={`/blog/${blog.slug}`}
+                    className="text-[#27baee] hover:text-[#209cc8] mt-3 inline-block"
                   >
                     READ MORE
                   </Link>
@@ -289,7 +289,7 @@ const Page = ({ params }) => {
                     onClick={() => handlePageChange(i + 1)}
                     className={`px-3 py-1 rounded ${
                       currentPage === i + 1
-                        ? "bg-blue-600 text-white"
+                        ? "bg-[#27baee] hover:bg-[#209cc8] text-white"
                         : "bg-gray-200"
                     }`}
                   >
@@ -330,8 +330,8 @@ const Page = ({ params }) => {
                 <li key={cat.id} className="flex items-center mb-2">
                   <IoIosArrowForward />
                   <Link
-                    href={`/hr-blog/category/${cat.slug}`}
-                    className="text-blue-600 ml-1"
+                    href={`/blog/category/${cat.slug}`}
+                    className="text-[#27baee] hover:text-[#209cc8] ml-1"
                   >
                     {cat.name}
                   </Link>
@@ -375,7 +375,7 @@ const Page = ({ params }) => {
 
               <button
                 onClick={handleSubscribe}
-                className="w-full mt-3 py-2 bg-blue-600 text-white rounded"
+                className="w-full mt-3 py-2 bg-[#27baee] hover:bg-[#209cc8] text-white rounded"
               >
                 SUBSCRIBE
               </button>
@@ -388,8 +388,8 @@ const Page = ({ params }) => {
                 <li key={post.slug} className="flex mb-2">
                   <IoIosArrowForward />
                   <Link
-                    href={`/hr-blog/${post.slug}`}
-                    className="text-blue-600 ml-1"
+                    href={`/blog/${post.slug}`}
+                    className="text-[#27baee] hover:text-[#209cc8] ml-1"
                   >
                     {post.subject}
                   </Link>

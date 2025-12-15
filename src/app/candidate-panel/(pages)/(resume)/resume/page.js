@@ -1,59 +1,133 @@
 "use client";
 
 import { motion } from "framer-motion";
-
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import axios from "axios";
+import BaseAPI from "@/app/BaseAPI/BaseAPI";
 export default function Resume() {
-  const resume = {
-    title: "Senior Product Designer",
-    experience: [
+
+  const selectedResumeId = Cookies.get("selectedResumeId");
+  const token = Cookies.get("tokenCandidate");
+  const [resumeData, setResumeData] = useState(null);
+
+  // const resume = {
+  //   title: "Senior Product Designer",
+  //   experience: [
+  //     {
+  //       id: 1,
+  //       title: "Senior Product Designer",
+  //       company: "TechCorp",
+  //       location: "San Francisco, CA",
+  //       startDate: "2020",
+  //       endDate: "Present",
+  //       description:
+  //         "Leading the design of enterprise products and design systems.",
+  //     },
+  //     {
+  //       id: 2,
+  //       title: "Product Designer",
+  //       company: "DesignHub",
+  //       location: "New York, NY",
+  //       startDate: "2018",
+  //       endDate: "2020",
+  //       description:
+  //         "Designed and shipped multiple features for the core product.",
+  //     },
+  //   ],
+  //   education: [
+  //     {
+  //       id: 1,
+  //       degree: "Master of Design",
+  //       school: "Stanford University",
+  //       field: "Human-Computer Interaction",
+  //       year: "2018",
+  //     },
+  //     {
+  //       id: 2,
+  //       degree: "Bachelor of Fine Arts",
+  //       school: "Rhode Island School of Design",
+  //       field: "Graphic Design",
+  //       year: "2016",
+  //     },
+  //   ],
+  //   skills: [
+  //     "UI/UX Design",
+  //     "User Research",
+  //     "Prototyping",
+  //     "Figma",
+  //     "Sketch",
+  //     "Adobe Creative Suite",
+  //     "HTML/CSS",
+  //     "Design Systems",
+  //   ],
+  // };
+
+const safeParse = (value, fallback = []) => {
+  try {
+    if (!value || value === "null") return fallback;
+    return JSON.parse(value.replace(/^"|"$/g, ""));
+  } catch {
+    return fallback;
+  }
+};
+
+const getSelectedResumeData = async (id) => {
+  try {
+    const response = await axios.post(
+      BaseAPI + `/admin/candidates/profile/${id}`,
+      null,
       {
-        id: 1,
-        title: "Senior Product Designer",
-        company: "TechCorp",
-        location: "San Francisco, CA",
-        startDate: "2020",
-        endDate: "Present",
-        description:
-          "Leading the design of enterprise products and design systems.",
-      },
-      {
-        id: 2,
-        title: "Product Designer",
-        company: "DesignHub",
-        location: "New York, NY",
-        startDate: "2018",
-        endDate: "2020",
-        description:
-          "Designed and shipped multiple features for the core product.",
-      },
-    ],
-    education: [
-      {
-        id: 1,
-        degree: "Master of Design",
-        school: "Stanford University",
-        field: "Human-Computer Interaction",
-        year: "2018",
-      },
-      {
-        id: 2,
-        degree: "Bachelor of Fine Arts",
-        school: "Rhode Island School of Design",
-        field: "Graphic Design",
-        year: "2016",
-      },
-    ],
-    skills: [
-      "UI/UX Design",
-      "User Research",
-      "Prototyping",
-      "Figma",
-      "Sketch",
-      "Adobe Creative Suite",
-      "HTML/CSS",
-      "Design Systems",
-    ],
-  };
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = response.data.response;
+
+    const experience = {
+      id: idx + 1,
+      title: safeParse(data.work.title),
+      company: item.company,
+      location: item.jobLocation,
+      startDate: item.jobStartedOn,
+      endDate: item.jobStillWorking ? "Present" : item.jobEndedOn,
+      description: item.description || "",
+    }
+
+    const education = safeParse(data.education).map((item, idx) => ({
+      id: idx + 1,
+      degree: item.degree,
+      school: item.school,
+      field: item.field,
+      year: item.year,
+    }));
+
+    const skills = safeParse(data.skills);
+
+    setResumeData({
+      experience,
+      education,
+      skills,
+      summary: data.summary,
+      profile_image_url: data.profile_image_url,
+    });
+
+    console.log("Fetched resume data:", resumeData);
+
+  } catch (error) {
+    console.log("Error fetching resume data:", error);
+  }
+};
+
+
+  useEffect(() => {
+    if (selectedResumeId && token) {
+      getSelectedResumeData(selectedResumeId);
+    }
+  }, [selectedResumeId, token]);
 
   return (
     <div className="relative p-6">
@@ -107,7 +181,7 @@ export default function Resume() {
               Experience
             </h3>
 
-            {resume.experience.map((exp, index) => (
+            {resumeData?.work?.map((exp, index) => (
               <motion.div
                 key={exp.id}
                 initial={{ opacity: 0, x: -25 }}
@@ -141,7 +215,7 @@ export default function Resume() {
               Education
             </h3>
 
-            {resume.education.map((edu, index) => (
+            {resumeData?.education?.map((edu, index) => (
               <motion.div
                 key={edu.id}
                 initial={{ opacity: 0, x: 25 }}
@@ -173,7 +247,7 @@ export default function Resume() {
             </h3>
 
             <div className="flex flex-wrap gap-3">
-              {resume.skills.map((skill, index) => (
+              {resumeData?.skills?.map((skill, index) => (
                 <motion.span
                   key={index}
                   initial={{ opacity: 0, y: 10 }}

@@ -11,6 +11,7 @@ import DemoModal from "./DemoModal";
 import BaseAPI from "../BaseAPI/BaseAPI";
 
 export default function Header() {
+
   const pathname = usePathname();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);

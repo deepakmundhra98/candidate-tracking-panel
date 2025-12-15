@@ -26,34 +26,60 @@ const Page = () => {
   const faqData = [
     {
       q: "What is an ATS?",
-      a: "An ATS (Applicant Tracking System) is a tool that helps organize the hiring process. It automatically collects, sorts, and manages job applications, making it easier for hiring teams to track candidates, communicate with them, and find the best fit for the job.",
+      a: " An ATS (Applicant Tracking System) is a tool that helps organize the hiring process. It collects, sorts, and manages job applications, making it easier for hiring teams to track candidates and find the best fit.",
     },
     {
       q: "What are the best ATS systems for small businesses?",
-      a: "The best ATS for small businesses should be easy to use, affordable, and scalable. ATSWAY is a great choice because it offers simple features, strong support, and helps small businesses stay organized while hiring.",
+      a: " The best ATS for small businesses is easy to use, affordable, and scalable. ATSWAY is a great choice because of its simple features, cost-effectiveness, and strong support.",
     },
     {
       q: "What are the main benefits of using an ATS?",
-      a: "An ATS speeds up the hiring process by automatically sorting resumes, making it easier to find relevant candidates. It also keeps all candidate information in one place for collaborative hiring.",
+      a: " An ATS speeds up hiring by sorting resumes and keeping candidate info organized, which helps the hiring team work more efficiently.",
     },
     {
       q: "How do applicant tracking systems work?",
-      a: "When a candidate applies, the ATS scans the resume for details like contact info, skills, and experience. This data is stored so hiring teams can view and manage applicants easily throughout the hiring process.",
+      a: " When candidates apply, the ATS scans resumes to extract info like contact details, experience, and skills. This helps hiring teams review and communicate with candidates while tracking their progress.",
     },
     {
       q: "What other features does an ATS have?",
-      a: (
-        <>
-          <p>An ATS includes multiple useful hiring features:</p>
-          <ul className="list-disc list-inside mt-2">
-            <li>Resume Parsing & Candidate Database</li>
-            <li>Job Posting & Application Management</li>
-            <li>Workflow & Pipeline Tracking</li>
-            <li>Analytics & Reports</li>
-            <li>Integrations & Automation Tools</li>
-          </ul>
-        </>
-      ),
+      // a: (
+      //   <>
+      //     <p>An ATS includes multiple useful hiring features:</p>
+      //     <ul className="list-disc list-inside mt-2">
+      //       <li>Resume Parsing & Candidate Database</li>
+      //       <li>Job Posting & Application Management</li>
+      //       <li>Workflow & Pipeline Tracking</li>
+      //       <li>Analytics & Reports</li>
+      //       <li>Integrations & Automation Tools</li>
+      //     </ul>
+      //   </>
+      // ),
+      a: " An ATS offers features like resume parsing, job posting, application tracking, workflow management, analytics, integrations, and automation to streamline hiring.",
+    },
+
+    {
+      q: "How can an ATS help me as a job seeker?",
+      a: "An ATS designed for candidates helps you organize your job applications, track interview schedules, build better resumes, and get notifications about your application status - all in one place.",
+    },
+
+    {
+      q: "Can I use an ATS to improve my resume?",
+      a: "Yes! Many candidate-focused ATS platforms offer resume-building tools and keyword suggestions to optimize your resume and increase your chances of getting noticed by employers.",
+    },
+
+    {
+      q: "Will I know the status of my job applications through an ATS?",
+      a: "Absolutely. A candidate-oriented ATS keeps you updated with real-time alerts on whether your application was viewed, shortlisted, or if interviews are scheduled.",
+    },
+
+    {
+      q: "Is my personal data safe in an ATS?",
+      a: "Yes, your data is stored securely, and with candidate-focused ATS, you have full control over your profile, applications, and documents.",
+    },
+
+    {
+      q: "Can I apply to multiple jobs and keep track of them easily?",
+      a: "Yes, ATS platforms allow you to save job listings, apply directly, and monitor the progress of all your applications from a single dashboard.",
     },
   ];
 
@@ -73,19 +99,19 @@ const Page = () => {
           <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4 px-4 sm:px-6 lg:px-8">
             <div className="md:w-1/2 text-center md:text-left flex flex-col">
               <h1 className="text-4xl leading-tight font-bold mb-2 text-left">
-                Applicant Tracking System for Agency Recruiters
+                Applicant Tracking System for Candidates{" "}
               </h1>
               <p className="text-lg font-bold mb-2 text-left">
-                Find, Hire, and Onboard Talent with Ease
+                Find, Track, and Grow Your Career with Confidence{" "}
               </p>
               <p className="text-md mb-6 text-left">
-                Atsway simplifies your hiring process. Our Applicant tracking
-                system with integrated HR features helps you attract the right
-                candidates, collaborate with your team, and make the hiring
-                process smoother from start to finish. With our easy-to-use
-                tools, you can quickly manage and track applicants, and even
-                handle essential HR tasks like payroll and attendance
-                management—all in one place.
+                Atsway helps candidates stay organized, discover better
+                opportunities, and present themselves professionally. Our smart
+                applicant tracking system is built for job seekers who want to
+                manage their job applications, track progress, and create a
+                polished resume - all in one place. With simple tools and a
+                clean interface, you can save jobs, monitor application stages,
+                and build a standout resume that gets attention.
               </p>
               <Link
                 href="/candidate-panel/build-resume"
@@ -113,23 +139,22 @@ const Page = () => {
             <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4 px-4  sm:px-6 lg:px-8">
               <div className="md:w-1/2 text-center md:text-left my-20">
                 <h2 className="text-3xl font-bold mb-4 text-left">
-                  Efficient Recruiting with Our ATS Software
+                  Streamline Your Job Search with Our Simple ATS Software{" "}
                 </h2>
                 <p className="text-md mb-6 text-left">
-                  Our AI-Powered Applicant Tracking System (ATS) makes
-                  recruiting easier and faster while enhancing HR and payroll
-                  management. It helps you find the right candidates quickly by
-                  organizing everything from job posts to hires while keeping
-                  track of employee attendance, payroll processing, and
-                  onboarding tasks. With a simple, easy-to-use platform, you’ll
-                  save time on repetitive tasks and focus more on what matters.
+                  Our AI-Powered Applicant Tracking System makes your job search
+                  easier by helping you manage every opportunity in one
+                  dashboard. You can save job postings, keep track of where
+                  you&apos;ve applied, and instantly see updates as you move
+                  through each stage. Our integrated tools help you stay
+                  prepared with resume-building support, reminders, and
+                  application progress tracking.
                 </p>
                 <p className="text-md mb-6 text-left">
-                  You can customize how things work, track candidates through
-                  each step, and work closely with your team. Our ATS makes the
-                  hiring process smoother, so you can spend less time on the
-                  admin side and more time finding the best talent for your
-                  team.
+                  With a clear, organized view of all your applications, you
+                  spend less time juggling spreadsheets and more time landing
+                  the right job. Everything is built to help you stay focused,
+                  confident, and ready for your next career move.
                 </p>
               </div>
               <div className="md:w-1/2 flex justify-center md:justify-end mt-8 md:mt-0">
@@ -148,7 +173,7 @@ const Page = () => {
           <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4 px-4  sm:px-6 lg:px-8">
             <div>
               <h2 className="text-3xl text-black font-bold text-center mb-8">
-                Benefits of Choosing ATS Software
+                Benefits of Choosing ATS Software for Candidates
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="bg-white p-6 rounded-lg shadow-md">
@@ -157,10 +182,11 @@ const Page = () => {
                     alt="icon1"
                     className="div-vertical"
                   />
-                  <h3 className="text-lg font-semibold my-2">Hire Faster</h3>
+                  <h3 className="text-lg font-semibold my-2">Stay Organized</h3>
                   <p className="text-md">
-                    Reduce the time it takes to fill positions by automating
-                    repetitive tasks and focusing on what matters.
+                    Keep all your job applications, interviews, and documents in
+                    one easy-to-manage dashboard. No more lost emails or missed
+                    deadlines.
                   </p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-md">
@@ -169,10 +195,13 @@ const Page = () => {
                     alt="icon1"
                     className="div-horizontal"
                   />
-                  <h3 className="text-lg font-semibold my-2">Stay Organized</h3>
+                  <h3 className="text-lg font-semibold my-2">
+                    Apply Faster and Smarter
+                  </h3>
                   <p className="text-md">
-                    Keep track of all your recruitment activities in one place,
-                    from job postings to candidate interviews.
+                    Save multiple resumes and cover letters, auto-fill
+                    applications quickly, and tailor your submissions to match
+                    each job&apos;s requirements.
                   </p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-md">
@@ -182,11 +211,12 @@ const Page = () => {
                     className="div-vertical"
                   />
                   <h3 className="text-lg font-semibold my-2">
-                    Better Collaboration
+                    Get Real-Time Updates
                   </h3>
                   <p className="text-md">
-                    Communicate easily with your team and candidates to ensure a
-                    smooth hiring process.
+                    Receive instant notifications about your application status,
+                    interview schedules, and recruiter messages to stay informed
+                    every step of the way.
                   </p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-md">
@@ -196,11 +226,12 @@ const Page = () => {
                     className="div-horizontal"
                   />
                   <h3 className="text-lg font-semibold my-2">
-                    Find Top Talent
+                    Improve Your Resume and Profile
                   </h3>
                   <p className="text-md">
-                    Use smart sourcing tools to build a strong talent pool and
-                    connect with the right candidates.
+                    Use smart tools that suggest improvements, highlight missing
+                    skills, and ensure your resume passes employer ATS
+                    screenings.
                   </p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-md">
@@ -210,11 +241,11 @@ const Page = () => {
                     className="div-vertical"
                   />
                   <h3 className="text-lg font-semibold my-2">
-                    Improve Candidate Experience
+                    Prepare Confidently for Interviews
                   </h3>
                   <p className="text-md">
-                    Make it easy for job seekers to apply and stay updated
-                    throughout the hiring process.
+                    Access detailed job info, recruiter notes, and reminders so
+                    you walk into every interview well-prepared and stress-free.
                   </p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-md">
@@ -224,11 +255,11 @@ const Page = () => {
                     className="div-horizontal"
                   />
                   <h3 className="text-lg font-semibold my-2">
-                    Make Smarter Decisions
+                    Discover Relevant Job Opportunities
                   </h3>
                   <p className="text-md">
-                    Get useful insights with recruitment analytics to hire the
-                    best fit for your team.
+                    Get personalized job recommendations based on your skills,
+                    experience, and preferences — saving you time and effort.
                   </p>
                 </div>
               </div>
@@ -304,7 +335,7 @@ const Page = () => {
 
         <section className="my-12 container mx-auto bg-white px-4 my-12 sm:px-6 lg:px-8 ">
           <h2 className="text-3xl text-center font-bold mb-10 pt-6 ">
-            Testimonials
+            What Candidates Are Saying About ATSWAY
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             <div className="bg-white shadow-lg p-6 rounded flex flex-col justify-between">
@@ -314,11 +345,11 @@ const Page = () => {
                 src="../Images/home/T1.png"
               />
               <p class="text-gray-700 mb-4">
-                ATSWAY has really helped us improve our hiring efficiency. It
-                keeps everything in one place and ensures we never miss an
-                important step.
+                ATSWAY helped me keep track of all my job applications in one
+                place. The reminders and status updates made my job search so
+                much easier and less stressful.
               </p>
-              <p class="font-bold">Josh L., Hiring Manager</p>
+              <p class="font-bold">Shreyn S.</p>
             </div>
             <div className="bg-white shadow-lg p-6 rounded flex flex-col justify-between">
               <img
@@ -327,11 +358,11 @@ const Page = () => {
                 src="../Images/home/T2.png"
               />
               <p class="text-gray-700 mb-4">
-                ATSWAY is simple, effective, and customizable. The candidate
-                tracking feature has been especially useful for our team, and we
-                love how it keeps everyone in sync.
+                Thanks to ATSWAY&apos;s resume builder and keyword suggestions,
+                my applications are getting more attention. I&apos;m finally
+                landing interviews!
               </p>
-              <p class="font-bold">David H., Director of Human Resources</p>
+              <p class="font-bold">David H.</p>
             </div>
             <div className="bg-white shadow-lg p-6 rounded flex flex-col justify-between">
               <img
@@ -340,12 +371,25 @@ const Page = () => {
                 src="../Images/home/T3.png"
               />
               <p class="text-gray-700 mb-4">
-                We love how easy it is to use ATSway. The candidate filtering
-                and communication tools are exactly what we needed. It’s helped
-                us make quicker, better hiring decisions.
+                I love how ATSWAY notifies me instantly about interview
+                schedules and application progress. It keeps me informed and
+                confident throughout my job hunt.
               </p>
-              <p class="font-bold">Olivia P., Head of Talent Acquisition</p>
+              <p class="font-bold">Jamimah K.</p>
             </div>
+
+            {/* <div className="bg-white shadow-lg p-6 rounded flex flex-col justify-between">
+              <img
+                alt="profilepic."
+                class="w-24 h-24 rounded-full mx-auto mb-4"
+                src="../Images/home/T3.png"
+              />
+              <p class="text-gray-700 mb-4">
+                The job recommendations based on my profile saved me hours of
+                searching. ATSWAY made my job search focused and efficient.
+              </p>
+              <p class="font-bold">Karan P.</p>
+            </div> */}
           </div>
         </section>
 
@@ -406,207 +450,8 @@ const Page = () => {
           </Swiper>
         </div>
 
-        {/* <section
-          className="bg-cover bg-center h-[800px]"
-          style={{ backgroundImage: "url('/Images/home/banner2.png')" }}
-        >
-          <div className="container mx-auto pt-10">
-            <div className=" text-center text-black font-bold text-3xl px-4 py-6 sm:px-6 lg:px-8 ">
-              <h2>Frequently Asked Questions</h2>
-            </div>
-            <div className="flex flex-col-reverse md:flex-row  gap-4 px-4 py-6 sm:px-6 lg:px-8">
-              <div className="md:w-1/2 text-center md:text-left rounded-md ">
-                <div
-                  class="accordion accordion-flush rounded-md"
-                  id="accordionFlushExample"
-                >
-                  <div class="accordion-item">
-                    <h3 class="accordion-header" id="flush-headingOne">
-                      <button
-                        class="accordion-button collapsed text-lg font-bold"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseOne"
-                        aria-expanded="false"
-                        aria-controls="flush-collapseOne"
-                      >
-                        What is an ATS?
-                      </button>
-                    </h3>
-                    <div
-                      id="flush-collapseOne"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="flush-headingOne"
-                      data-bs-parent="#accordionFlushExample"
-                    >
-                      <div class="accordion-body text-left">
-                        An ATS (Applicant Tracking System) is a tool that helps
-                        organize the hiring process. It automatically collects,
-                        sorts, and manages job applications. It makes it easier
-                        for hiring teams to keep track of candidates,
-                        communicate with them, and find the best fit for the
-                        job.
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="accordion-item">
-                    <h3 class="accordion-header" id="flush-headingTwo">
-                      <button
-                        class="accordion-button collapsed text-lg font-bold"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseTwo"
-                        aria-expanded="false"
-                        aria-controls="flush-collapseTwo"
-                      >
-                        What are the best ATS systems for small businesses?
-                      </button>
-                    </h3>
-                    <div
-                      id="flush-collapseTwo"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="flush-headingTwo"
-                      data-bs-parent="#accordionFlushExample"
-                    >
-                      <div class="accordion-body text-left">
-                        The best ATS for small businesses should be easy to use,
-                        affordable, and able to grow with your company. ATSWAY
-                        is a good choice because it has simple features, is
-                        cost-effective, and offers great support. It helps small
-                        businesses save time while keeping things organized as
-                        they hire.
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="accordion-item">
-                    <h3 class="accordion-header" id="flush-headingThree">
-                      <button
-                        class="accordion-button collapsed text-lg font-bold"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseThree"
-                        aria-expanded="false"
-                        aria-controls="flush-collapseThree"
-                      >
-                        What are the main benefits of using an ATS?
-                      </button>
-                    </h3>
-                    <div
-                      id="flush-collapseThree"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="flush-headingThree"
-                      data-bs-parent="#accordionFlushExample"
-                    >
-                      <div class="accordion-body text-left">
-                        Using an ATS helps speed up the hiring process. It
-                        automatically sorts resumes, making it quicker to find
-                        the right candidates. It also keeps all candidate
-                        information in one place, making it easier for the
-                        hiring team to work together.
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="accordion-item">
-                    <h3 class="accordion-header" id="flush-headingFour">
-                      <button
-                        class="accordion-button collapsed text-lg font-bold"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseFour"
-                        aria-expanded="false"
-                        aria-controls="flush-collapseFour"
-                      >
-                        How do applicant tracking systems work?
-                      </button>
-                    </h3>
-                    <div
-                      id="flush-collapseFour"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="flush-headingFour"
-                      data-bs-parent="#accordionFlushExample"
-                    >
-                      <div class="accordion-body text-left">
-                        When a candidate applies for a job, the ATS scans their
-                        resume to get important details like their contact info,
-                        work experience, and skills. This information is stored
-                        in a system where the hiring team can easily find and
-                        review it. The ATS also helps communicate with
-                        applicants and keeps track of where they are in the
-                        hiring process.
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="accordion-item">
-                    <h3 class="accordion-header" id="flush-headingFive">
-                      <button
-                        class="accordion-button collapsed text-lg font-bold"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseFive"
-                        aria-expanded="false"
-                        aria-controls="flush-collapseFive"
-                      >
-                        What other features does an ATS have?
-                      </button>
-                    </h3>
-                    <div
-                      id="flush-collapseFive"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="flush-headingFive"
-                      data-bs-parent="#accordionFlushExample"
-                    >
-                      <div class="accordion-body text-left">
-                        <p>
-                          An ATS has many useful features to help with hiring:
-                        </p>
-                        <ul class="list-disc list-inside">
-                          <li>
-                            Resume Parsing and Candidate Database: It reads
-                            resumes and stores candidate details for future use.
-                          </li>
-                          <li>
-                            Job Posting and Application Management: Post jobs on
-                            different platforms and track applicants in one
-                            place.
-                          </li>
-                          <li>
-                            Workflow and Pipeline Management: See where each
-                            candidate is in the hiring process and adjust
-                            workflows as needed.
-                          </li>
-                          <li>
-                            Analytics and Reporting: Get simple reports on
-                            things like how long it takes to hire and how
-                            candidates feel about the process.
-                          </li>
-                          <li>
-                            Integration and Automation: It works with other
-                            tools like payroll or onboarding and can automate
-                            tasks like sending emails or scheduling interviews.
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="md:w-1/2 flex justify-center md:justify-end mt-8 md:mt-0 ">
-                <img
-                  src="/Images/home/faq.png"
-                  alt="Hero"
-                  className="rounded-sm "
-                />
-              </div>
-            </div>
-          </div>
-        </section> */}
-
         <section
-          className="bg-cover bg-center h-[700px]"
+          className="bg-cover bg-center h-[900px]"
           style={{ backgroundImage: "url('/Images/home/banner2.png')" }}
         >
           <div className="container mx-auto pt-10">
@@ -660,14 +505,15 @@ const Page = () => {
             <div class="flex flex-col-reverse md:flex-row justify-between items-center gap-4 px-4  sm:px-6 lg:px-8">
               <div className="text-center md:text-left">
                 <h2 className="text-lg sm:text-3xl font-bold mb-4">
-                  Smart Hiring Made Simple with Atsway ATS
+                  Smart Job Searching Made Simple with ATSWAY
                 </h2>
                 <p className="text-md mb-6">
-                  Atsway comes packed with powerful features designed to
-                  simplify your hiring process and help you find the right
-                  talent faster. From organizing candidates to automating tasks,
-                  our applicant tracking system software makes recruitment
-                  effortless and efficient.
+                  ATSWAY offers powerful features designed to simplify your job
+                  search and help you land the right opportunities faster. From
+                  organizing your applications to providing personalized
+                  insights, our applicant tracking system makes managing your
+                  career effortless and efficient—so you can focus on preparing
+                  and succeeding.
                 </p>
               </div>
             </div>
@@ -676,7 +522,7 @@ const Page = () => {
 
         <section className="my-12 container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-5xl text-center font-bold ">
-            Key Features of Atsway ATS
+            Key Features of ATSWAY ATS for Candidates
           </h2>
         </section>
 
@@ -685,22 +531,29 @@ const Page = () => {
             <div className="md:w-1/2 p-6">
               <div>
                 <h3 className="text-2xl font-bold mb-4">
-                  1. Simple and Organized Candidate Tracking
+                  1. Simple and Organized Application Tracking
                 </h3>
                 <p className="text-md mb-4">
-                  Manage your entire hiring process on a single screen with our
-                  intuitive tracking system. Easily customize recruitment stages
-                  for each job and visualize progress in the way that works best
-                  for you.
+                  Manage your entire job search in one place with an easy-to-use
+                  dashboard. Track every application stage and stay on top of
+                  your progress without any confusion. Customize your job search
+                  stages and keep everything clear and structured.
                 </p>
-                <p className="text-md font-bold">
-                  Flexible Tracking Options:
-                  <span className="font-normal">
-                    {" "}
-                    Easily monitor and manage candidates, jobs, and hiring
-                    progress with a clear and structured pipeline that keeps
-                    everything organized.
-                  </span>
+                <p className="text-md">
+                  <ul className="list-disc list-inside">
+                    <li>
+                      <b>Clear Overview:</b> View all your applied jobs and
+                      statuses in one screen.
+                    </li>
+                    <li>
+                      <b>Customizable Stages:</b> Set personal job search
+                      milestones and track progress.
+                    </li>
+                    <li>
+                      <b>Organized Pipeline:</b> Never lose track of where you
+                      stand with each employer.
+                    </li>
+                  </ul>
                 </p>
               </div>
             </div>
@@ -725,28 +578,29 @@ const Page = () => {
             </div>
             <div className="md:w-1/2 p-6">
               <h3 className="text-2xl font-bold mb-4">
-                2. Automated Communication for a Smoother Process
+                2. Automated Notifications for Job Updates
               </h3>
               <p className="text-md mb-4">
-                Stay connected with candidates without the extra effort. Atsway
-                lets you automate personalized emails and updates at every step
-                of the hiring process, keeping candidates informed and engaged.
+                Stay informed without the hassle of checking emails constantly.
+                Automated alerts keep you updated on application progress,
+                interview invites, and follow-ups so you&apos;re always
+                prepared.
               </p>
-              <p className="text-md font-bold">
-                Smart Automation:
-                <span className="font-normal">
-                  {" "}
-                  Set up automated emails for interview invites, follow-ups, or
-                  rejections to ensure a consistent experience.
-                </span>
-              </p>
-              <p className="text-md font-bold">
-                Custom Workflows:
-                <span className="font-normal">
-                  {" "}
-                  Apply automation across all job openings or tailor it for
-                  specific hiring needs.
-                </span>
+              <p className="text-md">
+                <ul className="list-disc list-inside">
+                  <li>
+                    <b>Instant Alerts:</b> Receive updates when your
+                    application moves forward.
+                  </li>
+                  <li>
+                    <b>Interview Reminders:</b> Never miss a scheduled
+                    interview or deadline.
+                  </li>
+                  <li>
+                    <b>Follow-Up Prompts:</b> Get notified when to send
+                    follow-ups or additional info.
+                  </li>
+                </ul>
               </p>
             </div>
           </div>
@@ -757,28 +611,28 @@ const Page = () => {
             <div className="md:w-1/2 p-6">
               <div>
                 <h3 className="text-2xl font-bold mb-4">
-                  3. Quick and Efficient Candidate Screening
+                  3. Quick Resume & Profile Optimization{" "}
                 </h3>
                 <p className="text-md mb-4">
-                  Make faster hiring decisions with our quick-screening tools.
-                  Instantly review candidate details, compare qualifications,
-                  and take action—all within your hiring dashboard.
+                  Boost your chances with resume suggestions tailored to job
+                  descriptions. Easily build and customize your profile and
+                  resume to match what recruiters want to see.
                 </p>
-                <p className="text-md font-bold">
-                  Instant Candidate Review:
-                  <span className="font-normal">
-                    {" "}
-                    Access key candidate details without switching between
-                    screens.
-                  </span>
-                </p>
-                <p className="text-md font-bold">
-                  Streamlined Decision Making:
-                  <span className="font-normal">
-                    {" "}
-                    Move candidates forward or remove them from the pipeline
-                    with a single click.
-                  </span>
+                <p className="text-md">
+                  <ul className="list-disc list-inside">
+                    <li>
+                      <b>Keyword Suggestions:</b> Improve resume keywords for
+                      ATS compatibility.
+                    </li>
+                    <li>
+                      <b>Profile Strength:</b> Highlight your skills and
+                      experience effectively.
+                    </li>
+                    <li>
+                      <b>Resume Versions:</b> Create multiple resumes for
+                      different roles quickly.
+                    </li>
+                  </ul>
                 </p>
               </div>
             </div>
@@ -803,23 +657,26 @@ const Page = () => {
             </div>
             <div className="md:w-1/2 p-6">
               <h4 className="text-2xl font-bold mb-4">
-                4. All-in-One Candidate Profiles
+                4. Centralized Candidate Profile Management
               </h4>
               <p className="text-md mb-4">
-                Keep everything you need in one place with detailed candidate
-                profiles. Store resumes, messages, notes, and feedback in an
-                organized way, making it easy to track and evaluate candidates
-                now and in the future.
+                Keep all your job search documents and communications in one
+                secure place. Organize resumes, cover letters, interview notes,
+                and feedback for easy reference anytime.
               </p>
-              <p className="text-md font-normal">
-                <ul>
+              <p className="text-md">
+                <ul className="list-disc list-inside">
                   <li>
-                    • Access complete candidate details, including resumes and
-                    communication history, in one view.
+                    <b>Document Storage:</b> Save all important files securely
+                    in your profile.
                   </li>
                   <li>
-                    • Save past candidate data for future opportunities and
-                    smarter hiring decisions.
+                    <b>Communication History:</b> Track messages with
+                    recruiters in one view.
+                  </li>
+                  <li>
+                    <b>Notes & Feedback:</b> Keep personal interview and job
+                    notes handy.
                   </li>
                 </ul>
               </p>
@@ -832,23 +689,26 @@ const Page = () => {
             <div className="md:w-1/2 p-6">
               <div>
                 <h5 className="text-2xl font-bold mb-4">
-                  5. Quick and Easy Search for Everything You Need
+                  5. Smart Job Search & Saving Tools
                 </h5>
                 <p className="text-md mb-4">
-                  Find what you're looking for in seconds with our smart search
-                  features. Whether it's candidates, job openings, or contacts,
-                  our ATS software helps you navigate your hiring database with
-                  ease.
+                  Find, save, and revisit job listings with ease. Use smart
+                  search features and bookmark favorite opportunities to apply
+                  when ready.
                 </p>
-                <p className="text-md font-normal">
-                  <ul>
+                <p className="text-md">
+                  <ul className="list-disc list-inside">
                     <li>
-                      • Easily search and retrieve candidates, job listings, or
-                      contacts based on your criteria.
+                      <b>Powerful Search:</b> Filter jobs by role, location,
+                      salary, and more.
                     </li>
                     <li>
-                      • Get instant results with our fast and intuitive
-                      search-as-you-type feature.
+                      <b>Save & Revisit:</b> Bookmark jobs to apply later
+                      without losing track.
+                    </li>
+                    <li>
+                      <b>Instant Results:</b> Quickly access relevant job
+                      listings anytime.
                     </li>
                   </ul>
                 </p>
@@ -875,23 +735,26 @@ const Page = () => {
             </div>
             <div className="md:w-1/2 p-6">
               <h6 className="text-2xl font-bold mb-4">
-                6. Advanced Search with Multiple Filters
+                6. Personalized Job Recommendations{" "}
               </h6>
               <p className="text-md mb-4">
-                Find the right candidates faster by searching with multiple
-                criteria at once. Our Applicant Tracking System lets you filter
-                candidates based on job titles, skills, locations, and more to
-                match the perfect fit for your job openings.
+                Get matched with job openings that fit your skills and
+                preferences. Focus your efforts on roles that truly align with
+                your career goals.
               </p>
-              <p className="text-md font-normal">
-                <ul>
+              <p className="text-md">
+                <ul className="list-disc list-inside">
                   <li>
-                    • Use advanced search options to narrow down candidates
-                    quickly and effectively.
+                    <b>Skill-Based Matches:</b> See jobs tailored to your
+                    profile.
                   </li>
                   <li>
-                    • Customize searches based on your unique hiring needs with
-                    flexible filters.
+                    <b>Preference Filters:</b> Choose location, salary, and
+                    company type.
+                  </li>
+                  <li>
+                    <b>New Job Alerts:</b> Receive notifications when relevant
+                    jobs post.
                   </li>
                 </ul>
               </p>
@@ -904,22 +767,26 @@ const Page = () => {
             <div className="md:w-1/2 p-6">
               <div>
                 <h4 className="text-2xl font-bold mb-4">
-                  7. Branded Resumes Made Easy
+                  7. Build a Professional, Recruiter-Friendly Profile{" "}
                 </h4>
                 <p className="text-md mb-4">
-                  Easily customize candidate resumes to reflect your brand
-                  identity. Add your company logo, and watermark, and
-                  personalize resumes effortlessly within our ATS.
+                  Create a polished, structured profile that grabs recruiters’
+                  attention. Highlight your strengths and make it easy for
+                  employers to see your value.
                 </p>
-                <p className="text-md font-normal">
-                  <ul>
+                <p className="text-md">
+                  <ul className="list-disc list-inside">
                     <li>
-                      • Create professional-looking resumes with just a few
-                      clicks.
+                      <b>Clean Formatting:</b> Present your experience in an
+                      easy-to-read layout.
                     </li>
                     <li>
-                      • Save time and maintain consistency with our easy
-                      branding tools.
+                      <b>Highlight Key Skills:</b> Showcase what makes you
+                      unique.
+                    </li>
+                    <li>
+                      <b>Profile Visibility:</b> Increase chances of being
+                      discovered by recruiters.
                     </li>
                   </ul>
                 </p>
@@ -946,19 +813,26 @@ const Page = () => {
             </div>
             <div className="md:w-1/2 p-6">
               <h4 className="text-2xl font-bold mb-4">
-                8. Customize Your Data, Your Way
+                8. Track Your Career Growth & Skill Development{" "}
               </h4>
               <p className="text-md mb-4">
-                Customize the ATS software to fit your unique hiring needs by
-                adding custom fields, sections, and views for candidates, jobs,
-                and organizations.
+                Monitor your progress over time with insights on skill gaps and
+                achievements. Plan upskilling and certifications to stay
+                competitive in your field.
               </p>
-              <p className="text-md font-normal">
-                <ul>
-                  <li>• Organize recruitment data the way you prefer.</li>
+              <p className="text-md">
+                <ul className="list-disc list-inside">
                   <li>
-                    • Easily search and retrieve information with custom
-                    filters.
+                    <b>Skill Gap Analysis:</b> Identify areas to improve based
+                    on job trends.
+                  </li>
+                  <li>
+                    <b>Progress Tracking:</b> See how your applications and
+                    interviews improve.
+                  </li>
+                  <li>
+                    <b>Upskilling Suggestions:</b> Get recommendations for
+                    courses and certifications.
                   </li>
                 </ul>
               </p>
@@ -971,18 +845,26 @@ const Page = () => {
             <div className="md:w-1/2 p-6">
               <div>
                 <h4 className="text-2xl font-bold mb-4">
-                  9. Stay on Top of Onboarding Milestones
+                  9. Stay Ready for Interviews with Preparation Tools
                 </h4>
                 <p className="text-md mb-4">
-                  Track important hiring dates such as start dates, probation
-                  periods, and employment end dates to ensure a smooth
-                  onboarding process.
+                  Access interview details, company info, and reminders all in
+                  one place. Keep your prep notes and recruiter messages handy
+                  for confident performance.
                 </p>
-                <p className="text-md font-normal">
-                  <ul>
-                    <li>• Set reminders and keep onboarding on track.</li>
+                <p className="text-md">
+                  <ul className="list-disc list-inside">
                     <li>
-                      • Customize milestones to match your company’s process.
+                      <b>Interview Schedules:</b> Get alerts and view upcoming
+                      interviews easily.
+                    </li>
+                    <li>
+                      <b>Job Details:</b> Review role requirements and company
+                      info anytime.
+                    </li>
+                    <li>
+                      <b>Prep Notes:</b> Store your own notes and tips for
+                      each interview.
                     </li>
                   </ul>
                 </p>
@@ -1008,19 +890,26 @@ const Page = () => {
             </div>
             <div className="md:w-1/2 p-6">
               <h4 className="text-2xl font-bold mb-4">
-                10. Evaluate Candidates with Scorecards
+                10. Secure Document Management
               </h4>
               <p className="text-md mb-4">
-                Make better hiring decisions by using scorecards to standardize
-                candidate evaluations and compare them side by side.
+                Keep your resumes, certificates, and portfolios safe and
+                accessible for every job application. Upload and update
+                documents without worry.
               </p>
-              <p className="text-md font-normal">
-                <ul>
+              <p className="text-md">
+                <ul className="list-disc list-inside">
                   <li>
-                    • Create custom scorecards for consistent assessments.
+                    <b>Secure Storage:</b> Protect your files with encryption
+                    and privacy.
                   </li>
                   <li>
-                    • Share and review feedback with your team in one place.
+                    <b>Multiple Document Types:</b> Save resumes, cover
+                    letters, portfolios, and more.
+                  </li>
+                  <li>
+                    <b>Easy Attachments:</b> Add documents quickly when
+                    applying.
                   </li>
                 </ul>
               </p>
@@ -1032,19 +921,26 @@ const Page = () => {
             <div className="md:w-1/2 p-6">
               <div>
                 <h4 className="text-2xl font-bold mb-4">
-                  11. Connect with Candidates via Text Messages
+                  11. Consistent Follow-Up and Communication
                 </h4>
                 <p className="text-md mb-4">
-                  Improve response times and keep candidates engaged with direct
-                  SMS communication, all from within the ATS platform.
+                  Maintain professional communication with recruiters through
+                  automated reminders and messaging tools. Build positive
+                  relationships with timely responses.
                 </p>
-                <p className="text-md font-normal">
-                  <ul>
+                <p className="text-md">
+                  <ul className="list-disc list-inside">
                     <li>
-                      • Send interview updates and application status via text.
+                      <b>Automated Reminders:</b> Get prompts to follow up on
+                      applications.
                     </li>
                     <li>
-                      • Organize and track conversations for better follow-ups.
+                      <b>Messaging Hub:</b> Manage all recruiter
+                      communications in one place.
+                    </li>
+                    <li>
+                      <b>Response Tracking:</b> Know when recruiters reply or
+                      request info.
                     </li>
                   </ul>
                 </p>
@@ -1070,17 +966,26 @@ const Page = () => {
             </div>
             <div className="md:w-1/2 p-6">
               <h4 className="text-2xl font-bold mb-4">
-                12. Send Batch Notifications in One Go
+                12. Multi-Device Access Anywhere, Anytime
               </h4>
               <p className="text-md mb-4">
-                Easily update candidates and clients by sending bulk emails
-                straight from the ATS. Save time and keep everyone informed.
+                Manage your job search on your phone, tablet, or desktop
+                seamlessly. Stay updated and apply to jobs no matter where you
+                are.
               </p>
-              <p className="text-md font-normal">
-                <ul>
-                  <li>• Use email templates for quick communication.</li>
+              <p className="text-md">
+                <ul className="list-disc list-inside">
                   <li>
-                    • Track responses and measure the success of your outreach.
+                    <b>Cross-Platform Sync:</b> Your data updates instantly
+                    across devices.
+                  </li>
+                  <li>
+                    <b>Mobile-Friendly Interface:</b> Apply and track easily
+                    on the go.
+                  </li>
+                  <li>
+                    <b>Cloud Storage:</b> Access documents and profiles
+                    anywhere.
                   </li>
                 </ul>
               </p>
@@ -1092,26 +997,26 @@ const Page = () => {
             <div className="md:w-1/2 p-6">
               <div>
                 <h2 className="text-2xl font-bold mb-4">
-                  13. Effective Job Marketing
+                  13. Save Time with Auto-Fill Applications{" "}
                 </h2>
                 <p className="text-md mb-4">
-                  Get your job listings in front of the right people, faster.
-                  With just one click, share job openings across multiple job
-                  boards, social media platforms, and your branded career page.
-                  Maximize visibility and attract top talent effortlessly.
+                  Apply faster with pre-filled application forms using your
+                  stored profile information. Avoid repetitive typing and
+                  streamline your job submissions.
                 </p>
-                <p className="text-md font-normal">
-                  <ul>
+                <p className="text-md">
+                  <ul className="list-disc list-inside">
                     <li>
-                      <span className="font-bold">
-                        One-Click Job Postings –
-                      </span>{" "}
-                      Post jobs to job boards, social media, and your career
-                      site in just one click.
+                      <b>Auto-Fill Forms:</b> Complete applications quickly
+                      with saved data.
                     </li>
                     <li>
-                      <span className="font-bold">Boost Candidate Reach –</span>
-                      Expand your hiring reach by targeting the right audience.
+                      <b>Consistent Info:</b> Ensure accuracy across multiple
+                      job sites.
+                    </li>
+                    <li>
+                      <b>One-Click Apply:</b> Reduce effort and increase
+                      efficiency.
                     </li>
                   </ul>
                 </p>
@@ -1137,29 +1042,26 @@ const Page = () => {
             </div>
             <div className="md:w-1/2 p-6">
               <h3 className="text-2xl font-bold mb-4">
-                14. Smart Resume Parsing
+                14. Personalized Career Dashboard{" "}
               </h3>
               <p className="text-md mb-4">
-                Save time and effort by automatically extracting key details
-                from resumes. Our system processes resumes in multiple formats,
-                converting them into structured candidate profiles to speed up
-                hiring.
+                View your entire job search progress, upcoming tasks, and saved
+                jobs in one customizable dashboard. Stay motivated and organized
+                every step of the way.
               </p>
-              <p className="text-md font-normal">
-                <ul>
+              <p className="text-md">
+                <ul className="list-disc list-inside">
                   <li>
-                    <span className="font-bold">Quick Data Extraction –</span>{" "}
-                    Instantly capture candidate information from resumes.
+                    <b>At-A-Glance Summary:</b> Track applications,
+                    interviews, and tasks.
                   </li>
                   <li>
-                    <span className="font-bold">Multiple File Support –</span>
-                    Works with PDF, Word, and other popular formats.
+                    <b>Custom Views:</b> Arrange dashboard elements to fit
+                    your needs.
                   </li>
                   <li>
-                    <span className="font-bold">
-                      Accurate Candidate Profiles –
-                    </span>
-                    Organize and analyze candidate data efficiently.
+                    <b>Motivational Insights:</b> See progress and next steps
+                    clearly.
                   </li>
                 </ul>
               </p>
@@ -1171,37 +1073,26 @@ const Page = () => {
             <div className="md:w-1/2 p-6">
               <div>
                 <h5 className="text-2xl font-bold mb-4">
-                  15. Streamlined New Hire Onboarding
+                  15. Long-Term Career Planning Tools
                 </h5>
                 <p className="text-md mb-4">
-                  Simplify and personalize the entire onboarding journey with
-                  our secure digital portal. Guide new hires through paperwork,
-                  requirements, and company policies—all from one centralized
-                  platform.
+                  Beyond job applications, plan your career path with goal
+                  setting, milestone tracking, and document storage. Turn your
+                  job search into a strategic journey.
                 </p>
-                <p className="text-md font-normal">
-                  <ul>
+                <p className="text-md">
+                  <ul className="list-disc list-inside">
                     <li>
-                      <span className="font-bold">Centralized eBoarding –</span>{" "}
-                      Manage onboarding tasks and documents in one place.
+                      <b>Goal Setting:</b> Define short- and long-term career
+                      objectives.
                     </li>
                     <li>
-                      <span className="font-bold">
-                        Digital Documents & eSignatures –
-                      </span>
-                      Complete all paperwork online with easy eSign options.
+                      <b>Milestone Tracking:</b> Monitor certifications,
+                      promotions, and more.
                     </li>
                     <li>
-                      <span className="font-bold">
-                        Tailored Onboarding Process –
-                      </span>{" "}
-                      Customize steps based on job roles and company needs.
-                    </li>
-                    <li>
-                      <span className="font-bold">
-                        Better Candidate Experience –
-                      </span>
-                      Make onboarding smooth and engaging for new hires.
+                      <b>Career History:</b> Keep a record of jobs applied,
+                      interviews, and offers.
                     </li>
                   </ul>
                 </p>
@@ -1227,27 +1118,29 @@ const Page = () => {
             </div>
             <div className="md:w-1/2 p-6">
               <h6 className="text-2xl font-bold mb-4">
-                16. Recruitment Analytics & Reporting
+                16. Job Search Analytics & Insights{" "}
               </h6>
               <p className="text-md mb-4">
-                Make smarter hiring decisions with real-time insights. Our
-                easy-to-use dashboards and reports provide a clear view of your
-                hiring performance, helping you track key metrics and optimize
-                your recruitment process.
+                Make smarter career moves with personalized, real-time insights
+                into your job search progress. Our easy-to-use dashboards help
+                you understand where your applications stand, track your
+                interview success, and identify opportunities for improvement.
+                Stay informed and adapt your strategy for better results.
               </p>
-              <p className="text-md font-normal">
-                <ul>
+              <p className="text-md">
+                <ul className="list-disc list-inside">
                   <li>
-                    <span className="font-bold">Real-Time Dashboards –</span>{" "}
-                    Instantly capture candidate information from resumes.
+                    <b>Real-Time Progress Tracking:</b> See updates on your
+                    applications, interviews, and offers at a glance.
                   </li>
                   <li>
-                    <span className="font-bold">Visual Reports –</span>Works
-                    with PDF, Word, and other popular formats.
+                    <b>Visual Performance Reports:</b> Understand your job
+                    search trends with easy-to-read charts and graphs.
                   </li>
                   <li>
-                    <span className="font-bold">Customizable Insights –</span>
-                    Organize and analyze candidate data efficiently.
+                    <b>Custom Insights & Suggestions:</b> Receive tailored
+                    advice to optimize your resume, applications, and skills for
+                    future success.
                   </li>
                 </ul>
               </p>

@@ -9,6 +9,7 @@ import {
   BsLink45Deg,
   BsGeoAlt,
   BsCalendar,
+  BsSave
 } from "react-icons/bs";
 import BaseAPI from "@/app/BaseAPI/BaseAPI";
 import Cookies from "js-cookie";
@@ -241,7 +242,7 @@ export default function LinkedInSearchA() {
                   className="inline-flex  items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium hover:brightness-105 transition"
                   onClick={handleSave}
                 >
-                  <BsSearch />
+                  <BsSave />
                   <span>{isLoading ? "Saving..." : "Save"}</span>
                 </button>
               </div>
@@ -276,7 +277,7 @@ export default function LinkedInSearchA() {
 
                 {/* About */}
                 {profile.about && (
-                  <section>
+                  <section className="mt-8">
                     <h4 className="text-white font-semibold mb-2">About</h4>
                     <p className="text-gray-300 whitespace-pre-line">
                       {profile.about}
@@ -285,7 +286,7 @@ export default function LinkedInSearchA() {
                 )}
 
                 {/* Experience */}
-                <section>
+                <section className="mt-8">
                   <h4 className="text-white font-semibold mb-4">Experience</h4>
 
                   <div className="space-y-6">
@@ -359,7 +360,7 @@ export default function LinkedInSearchA() {
                 </section>
 
                 {/* Education */}
-                <section>
+                <section className="mt-8">
                   <h4 className="text-white font-semibold mb-4">Education</h4>
                   <div className="space-y-4">
                     {profile.education.map((edu, idx) => (
@@ -394,7 +395,7 @@ export default function LinkedInSearchA() {
                 </section>
 
                 {/* Skills */}
-                <section>
+                <section className="mt-8">
                   <h4 className="text-white font-semibold mb-2">Skills</h4>
                   <div className="flex flex-wrap gap-2">
                     {profile.skills.map((s, i) => (

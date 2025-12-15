@@ -148,7 +148,7 @@ const Page = () => {
       ) : (
         <div>
           {/* Banner */}
-          <div className="bg-blue-600 py-6 mb-6">
+          <div className="bg-[#27baee] py-6 mb-6">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <h1 className="text-4xl font-bold text-white mb-2">
                 Achieve Hiring Excellence with the ATSWAY Blog
@@ -173,7 +173,7 @@ const Page = () => {
                       <h1 className="text-xl font-semibold">
                         <Link
                           href={`/blog/${blog.slug}`}
-                          className="text-blue-500 hover:text-blue-700"
+                          className="text-[#27baee] hover:text-[#209cc8]"
                         >
                           {blog.subject}
                         </Link>
@@ -191,7 +191,7 @@ const Page = () => {
                                   .trim()
                                   .toLowerCase()
                                   .replace(/\s+/g, "-")}`}
-                                className="text-blue-600"
+                                className="text-[#27baee] hover:text-[#209cc8]"
                               >
                                 {cat.trim()}
                               </Link>
@@ -207,7 +207,7 @@ const Page = () => {
                             <Link
                               key={i}
                               href={`/blog/tag/${tag.trim().replace(/\s+/g, "-")}`}
-                              className="text-blue-600 hover:text-blue-800"
+                              className="text-[#27baee] hover:text-[#209cc8]"
                             >
                               {tag.trim()}
                               {i < blog.tags.split(",").length - 1 && ", "}
@@ -235,14 +235,14 @@ const Page = () => {
 
                       <Link
                         href={`/blog/${blog.slug}`}
-                        className="text-blue-500 hover:text-blue-700 mt-4 inline-block"
+                        className="text-[#27baee] hover:text-[#209cc8] mt-4 inline-block"
                       >
                         READ MORE
                       </Link>
                     </div>
                   ))
                 ) : (
-                  <p className="text-center text-indigo-500 text-xl font-semibold">
+                  <p className="text-center text-[#27baee] text-xl font-semibold">
                     No blogs found...
                   </p>
                 )}
@@ -263,8 +263,8 @@ const Page = () => {
                         key={idx}
                         className={`px-4 py-2 border rounded-md ${
                           currentPage === idx + 1
-                            ? "bg-blue-500 text-white"
-                            : "bg-white text-blue-500"
+                            ? "bg-[#27baee] hover:bg-[#209cc8] text-white"
+                            : "bg-white text-[#27baee] hover:text-[#209cc8]"
                         }`}
                         onClick={() => handlePageChange(idx + 1)}
                       >
@@ -290,7 +290,7 @@ const Page = () => {
                 <p className="text-lg font-semibold mb-1">Search</p>
                 <div className="relative mb-4">
                   <input
-                    className="w-full px-3 py-2 border rounded-md"
+                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#27baee]"
                     type="text"
                     value={searchText}
                     onChange={handleSearchChange}
@@ -308,7 +308,7 @@ const Page = () => {
                         <IoIosArrowForward />
                         <Link
                           href={`/blog/category/${cat.slug}`}
-                          className="text-blue-600 hover:underline"
+                          className="text-[#27baee] hover:text-[#209cc8] hover:underline"
                         >
                           {cat.name}
                         </Link>
@@ -323,7 +323,7 @@ const Page = () => {
 
                   <input
                     id="email"
-                    className="w-full h-10 px-3 border rounded"
+                    className="w-full h-10 px-3 border rounded -md focus:outline-none focus:ring-2 focus:ring-[#27baee]"
                     type="email"
                     value={formData.email}
                     onChange={handleInputChange}
@@ -343,7 +343,7 @@ const Page = () => {
                   </div>
 
                   <button
-                    className="w-full mt-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                    className="w-full mt-3 py-2 bg-[#27baee] hover:bg-[#209cc8] text-white rounded-md"
                     onClick={handleSubscribe}
                   >
                     SUBSCRIBE
@@ -359,7 +359,7 @@ const Page = () => {
                         <IoIosArrowForward />
                         <Link
                           href={`/blog/${post.slug}`}
-                          className="text-blue-600 hover:underline"
+                          className="text-[#27baee] hover:text-[#209cc8] hover:underline"
                         >
                           {post.subject}
                         </Link>

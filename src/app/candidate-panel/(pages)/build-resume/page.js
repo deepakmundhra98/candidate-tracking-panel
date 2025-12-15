@@ -1,12 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCandidates } from "../../../../store/candidate/candidateSlice";
 
 export default function ResumeBuilderSelect() {
   const [selected, setSelected] = useState("");
   const [error, setError] = useState("");
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCandidates());
+  }, [dispatch]);
+
+  const { list, loading } = useSelector((state) => state.candidate);
+
+  // console.log(list, " Candidates List");
+
+  if (loading) return <p>Loading...</p>;
 
   const handleNext = () => {
     if (!selected) {
@@ -17,7 +31,7 @@ export default function ResumeBuilderSelect() {
   };
 
   return (
-    <div className="p-6 relative min-h-screen flex items-center justify-center">
+    <div className="p-6 relative min-h-screen flex flex-col items-center justify-center">
       {/* Background */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#0f1124] via-[#1a1c33] to-[#090c1b]" />
       <div className="absolute top-20 left-20 w-80 h-80 bg-indigo-600/30 blur-[160px] rounded-full" />
@@ -111,6 +125,41 @@ export default function ResumeBuilderSelect() {
           )}
         </motion.div>
       </motion.div>
+
+      {list?.is_resume_available === 1 && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, ease: "easeOut" }}
+          className="mt-8 flex justify-center"
+        >
+          <Link
+            href="/candidate-panel/resume-listing"
+            className="group flex items-center gap-3 px-6 py-4 
+      rounded-2xl bg-white/5 backdrop-blur-xl border border-white/15
+      hover:bg-white/10 transition-all duration-300
+      shadow-md hover:shadow-indigo-500/30"
+          >
+            {/* Accent Dot */}
+            <span
+              className="w-2.5 h-2.5 rounded-full 
+        bg-gradient-to-r from-indigo-400 to-purple-500 
+        animate-pulse"
+            />
+
+            <span className="text-gray-200 text-sm sm:text-base">
+              You already have a resume —
+              <span className="ml-1 text-indigo-300 font-medium group-hover:text-indigo-200 transition">
+                View Existing
+              </span>
+            </span>
+
+            <span className="text-indigo-400 group-hover:translate-x-1 transition-transform">
+              →
+            </span>
+          </Link>
+        </motion.div>
+      )}
 
       {/* Neon style */}
       <style>{`

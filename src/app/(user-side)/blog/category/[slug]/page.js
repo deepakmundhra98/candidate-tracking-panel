@@ -64,7 +64,7 @@ export default function BlogCategoryPage({ params }) {
       setFilteredBlogs(filtered);
     } catch (error) {
       console.error(error);
-      router.push("/hr-blog");
+      router.push("/blog");
     } finally {
       setLoading(false);
     }
@@ -175,7 +175,7 @@ export default function BlogCategoryPage({ params }) {
     <>
     <Header />  
       {/* Banner */}
-      <div className="bg-blue-600 py-6 mb-6">
+      <div className="bg-[#27baee] py-6 mb-6">
         <div className="container mx-auto">
           <h1 className="text-4xl text-white font-bold px-4">
             Blog Category: {slug.replace(/-/g, " ").toUpperCase()}
@@ -197,8 +197,8 @@ export default function BlogCategoryPage({ params }) {
                 >
                   <h2 className="text-xl font-semibold">
                     <Link
-                      href={`/hr-blog/${blog.slug}`}
-                      className="text-blue-500 hover:text-blue-700"
+                      href={`/blog/${blog.slug}`}
+                      className="text-[#27baee] hover:text-[#209cc8]"
                     >
                       {blog.subject}
                     </Link>
@@ -209,11 +209,11 @@ export default function BlogCategoryPage({ params }) {
                     {blog.category_names.split(",").map((cat, i) => (
                       <Link
                         key={i}
-                        href={`/hr-blog/category/${cat
+                        href={`/blog/category/${cat
                           .trim()
                           .toLowerCase()
                           .replace(/\s+/g, "-")}`}
-                        className="text-blue-600 ml-1"
+                        className="text-[#27baee] hover:text-[#209cc8] ml-1"
                       >
                         {cat.trim()}
                       </Link>
@@ -225,8 +225,8 @@ export default function BlogCategoryPage({ params }) {
                     {blog.tags.split(",").map((tag, i) => (
                       <Link
                         key={i}
-                        href={`/hr-blog/tag/${tag.trim().replace(/\s+/g, "-")}`}
-                        className="text-blue-600"
+                        href={`/blog/tag/${tag.trim().replace(/\s+/g, "-")}`}
+                        className="text-[#27baee] hover:text-[#209cc8]"
                       >
                         {tag.trim()}
                         {i < blog.tags.split(",").length - 1 ? ", " : ""}
@@ -253,8 +253,8 @@ export default function BlogCategoryPage({ params }) {
                   </div>
 
                   <Link
-                    href={`/hr-blog/${blog.slug}`}
-                    className="text-blue-500 mt-3 inline-block"
+                    href={`/blog/${blog.slug}`}
+                    className="text-[#27baee] hover:text-[#209cc8] mt-3 inline-block"
                   >
                     READ MORE
                   </Link>
@@ -283,7 +283,7 @@ export default function BlogCategoryPage({ params }) {
                     onClick={() => handlePageChange(i + 1)}
                     className={`px-3 py-1 rounded ${
                       currentPage === i + 1
-                        ? "bg-blue-600 text-white"
+                        ? "bg-[#27baee] hover:bg-[#209cc8] text-white"
                         : "bg-gray-200"
                     }`}
                   >
@@ -324,8 +324,8 @@ export default function BlogCategoryPage({ params }) {
                 <li key={cat.id} className="flex items-center mb-2">
                   <IoIosArrowForward />
                   <Link
-                    href={`/hr-blog/category/${cat.slug}`}
-                    className="text-blue-600 ml-1"
+                    href={`/blog/category/${cat.slug}`}
+                    className="text-[#27baee] hover:text-[#209cc8] ml-1"
                   >
                     {cat.name}
                   </Link>
@@ -365,7 +365,7 @@ export default function BlogCategoryPage({ params }) {
 
               <button
                 onClick={handleSubscribe}
-                className="w-full mt-3 py-2 bg-blue-600 text-white rounded"
+                className="w-full mt-3 py-2 bg-[#27baee] hover:bg-[#209cc8] text-white rounded"
               >
                 SUBSCRIBE
               </button>
@@ -378,8 +378,8 @@ export default function BlogCategoryPage({ params }) {
                 <li key={post.slug} className="flex mb-2">
                   <IoIosArrowForward />
                   <Link
-                    href={`/hr-blog/${post.slug}`}
-                    className="text-blue-600 ml-1"
+                    href={`/blog/${post.slug}`}
+                    className="text-[#27baee] hover:text-[#209cc8] ml-1"
                   >
                     {post.subject}
                   </Link>
