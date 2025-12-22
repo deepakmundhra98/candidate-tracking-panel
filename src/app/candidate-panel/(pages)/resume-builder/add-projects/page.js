@@ -149,7 +149,7 @@ export default function ProjectsStep() {
                 <div className="grid grid-cols-2 gap-6">
                   <div>
                     <label className="text-gray-300 text-sm">
-                      Project Title
+                      Project Title <span className="text-red-400">*</span>
                     </label>
                     <input
                       type="text"
@@ -172,7 +172,7 @@ export default function ProjectsStep() {
                   </div>
 
                   <div>
-                    <label className="text-gray-300 text-sm">Your Role</label>
+                    <label className="text-gray-300 text-sm">Your Role <span className="text-red-400">*</span></label>
                     <input
                       type="text"
                       value={p.role}
@@ -194,7 +194,7 @@ export default function ProjectsStep() {
                   </div>
 
                   <div>
-                    <label className="text-gray-300 text-sm">Start Month</label>
+                    <label className="text-gray-300 text-sm">Start Month <span className="text-red-400">*</span></label>
                     <input
                       type="month"
                       value={p.start_month}
@@ -216,7 +216,7 @@ export default function ProjectsStep() {
 
                   <div>
                     <div className="flex items-center justify-between">
-                      <label className="text-gray-300 text-sm">End Month</label>
+                      <label className="text-gray-300 text-sm">End Month <span className="text-red-400">*</span></label>
                       <label className="flex items-center space-x-2 text-gray-300 text-xs cursor-pointer">
                         <input
                           type="checkbox"
@@ -267,7 +267,7 @@ export default function ProjectsStep() {
                   </div>
 
                   <div className="col-span-2">
-                    <label className="text-gray-300 text-sm">Description</label>
+                    <label className="text-gray-300 text-sm">Description <span className="text-red-400">*</span></label>
                     <textarea
                       rows="4"
                       value={p.description}

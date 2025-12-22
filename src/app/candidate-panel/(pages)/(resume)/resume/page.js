@@ -1,127 +1,76 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import BaseAPI from "@/app/BaseAPI/BaseAPI";
-export default function Resume() {
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import { BsDownload } from "react-icons/bs";
 
+export default function Resume() {
   const selectedResumeId = Cookies.get("selectedResumeId");
   const token = Cookies.get("tokenCandidate");
+
   const [resumeData, setResumeData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const resumeRef = useRef(null);
 
-  // const resume = {
-  //   title: "Senior Product Designer",
-  //   experience: [
-  //     {
-  //       id: 1,
-  //       title: "Senior Product Designer",
-  //       company: "TechCorp",
-  //       location: "San Francisco, CA",
-  //       startDate: "2020",
-  //       endDate: "Present",
-  //       description:
-  //         "Leading the design of enterprise products and design systems.",
-  //     },
-  //     {
-  //       id: 2,
-  //       title: "Product Designer",
-  //       company: "DesignHub",
-  //       location: "New York, NY",
-  //       startDate: "2018",
-  //       endDate: "2020",
-  //       description:
-  //         "Designed and shipped multiple features for the core product.",
-  //     },
-  //   ],
-  //   education: [
-  //     {
-  //       id: 1,
-  //       degree: "Master of Design",
-  //       school: "Stanford University",
-  //       field: "Human-Computer Interaction",
-  //       year: "2018",
-  //     },
-  //     {
-  //       id: 2,
-  //       degree: "Bachelor of Fine Arts",
-  //       school: "Rhode Island School of Design",
-  //       field: "Graphic Design",
-  //       year: "2016",
-  //     },
-  //   ],
-  //   skills: [
-  //     "UI/UX Design",
-  //     "User Research",
-  //     "Prototyping",
-  //     "Figma",
-  //     "Sketch",
-  //     "Adobe Creative Suite",
-  //     "HTML/CSS",
-  //     "Design Systems",
-  //   ],
-  // };
+  /* ================= GET DATA ================= */
+  const getSelectedResumeData = async (id) => {
+    try {
+      setLoading(true);
 
-const safeParse = (value, fallback = []) => {
-  try {
-    if (!value || value === "null") return fallback;
-    return JSON.parse(value.replace(/^"|"$/g, ""));
-  } catch {
-    return fallback;
-  }
-};
+      const response = await axios.post(
+        `${BaseAPI}/admin/candidates/profile/${id}`,
+        null,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
-const getSelectedResumeData = async (id) => {
-  try {
-    const response = await axios.post(
-      BaseAPI + `/admin/candidates/profile/${id}`,
-      null,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+      const data = response.data.profile;
 
-    const data = response.data.response;
+      const candidateData = response.data.candidate;
 
-    const experience = {
-      id: idx + 1,
-      title: safeParse(data.work.title),
-      company: item.company,
-      location: item.jobLocation,
-      startDate: item.jobStartedOn,
-      endDate: item.jobStillWorking ? "Present" : item.jobEndedOn,
-      description: item.description || "",
+      const work = (data.work || []).map((item, idx) => ({
+        id: idx + 1,
+        title: item.title,
+        company: item.company,
+        employmentType: item.employmentType,
+        location: item.jobLocation,
+        startDate: item.jobStartedOn,
+        endDate: item.jobStillWorking ? "Present" : item.jobEndedOn,
+        duration: item.duration,
+        description: item.description,
+      }));
+
+      const education = (data.education || []).map((item, idx) => ({
+        id: idx + 1,
+        school: item.school,
+        degree: item.degree,
+        field: item.field,
+        year: item.year,
+      }));
+
+      setResumeData({
+        id: data.id,
+        name: `${candidateData.first_name} ${candidateData.last_name}`,
+        email: candidateData.email,
+        profile_image_url: data.profile_image_url,
+        summary: data.summary,
+        work,
+        education,
+        skills: data.skills || [],
+      });
+
+    } catch (err) {
+      console.log("Error fetching resume:", err);
+    } finally {
+      setLoading(false);
     }
-
-    const education = safeParse(data.education).map((item, idx) => ({
-      id: idx + 1,
-      degree: item.degree,
-      school: item.school,
-      field: item.field,
-      year: item.year,
-    }));
-
-    const skills = safeParse(data.skills);
-
-    setResumeData({
-      experience,
-      education,
-      skills,
-      summary: data.summary,
-      profile_image_url: data.profile_image_url,
-    });
-
-    console.log("Fetched resume data:", resumeData);
-
-  } catch (error) {
-    console.log("Error fetching resume data:", error);
-  }
-};
-
+  };
 
   useEffect(() => {
     if (selectedResumeId && token) {
@@ -129,152 +78,195 @@ const getSelectedResumeData = async (id) => {
     }
   }, [selectedResumeId, token]);
 
+  /* ================= PDF DOWNLOAD ================= */
+  const downloadPDF = async () => {
+    if (!resumeRef.current) return;
+
+    const canvas = await html2canvas(resumeRef.current, {
+      scale: 2,
+      backgroundColor: "#0e1125",
+    });
+
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    let heightLeft = pdfHeight;
+    let position = 0;
+
+    while (heightLeft > 0) {
+      pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
+      heightLeft -= pdf.internal.pageSize.getHeight();
+      position -= pdf.internal.pageSize.getHeight();
+      if (heightLeft > 0) pdf.addPage();
+    }
+
+    pdf.save("My_Resume.pdf");
+  };
+
   return (
-    <div className="relative p-6">
+    <div className="relative min-h-screen px-6 py-12">
 
-      {/* Futuristic Background */}
-      <div className="min-h-screen absolute inset-0 -z-10 bg-gradient-to-br from-[#0e1125] via-[#171a31] to-[#0d0f1c]" />
-      <div className="absolute top-10 left-20 w-96 h-96 bg-indigo-600/30 blur-[150px] rounded-full -z-10" />
-      <div className="absolute bottom-10 right-20 w-[30rem] h-[30rem] bg-purple-500/20 blur-[160px] rounded-full -z-10" />
+      {/* BG */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#0e1125] via-[#181a2d] to-[#0e1125]" />
 
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
 
-        {/* HEADER CARD */}
+        {/* HEADER */}
         <motion.div
-          initial={{ opacity: 0, y: -20, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          className="p-6 mb-8 bg-white/10 backdrop-blur-2xl rounded-2xl border border-white/20 shadow-xl neon-card"
-        >
-          <div className="flex justify-between items-center">
-            <div>
-              <h2 className="text-3xl font-semibold text-white">My Resume</h2>
-              <p className="text-gray-300 mt-1">
-                Your professional journey & achievements
-              </p>
-            </div>
-
-            <motion.button
-              whileTap={{ scale: 0.92 }}
-              className="px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 
-              text-white font-medium shadow-md hover:shadow-purple-500/40 transition"
-            >
-              Download PDF
-            </motion.button>
-          </div>
-        </motion.div>
-
-        {/* MAIN CARD */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
-          className="p-8 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-xl neon-card shadow-2xl"
+          className="
+            flex justify-between items-center mb-10 
+            bg-white/10 p-6 rounded-2xl backdrop-blur-xl border border-white/10
+          "
         >
+          <h2 className="text-3xl font-semibold text-white">
+            Resume Preview
+          </h2>
 
-          {/* EXPERIENCE */}
-          <motion.div
-            initial={{ opacity: 0, x: -25 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mb-12"
+          <motion.button
+            whileTap={{ scale: 0.92 }}
+            onClick={downloadPDF}
+            className="
+                flex items-center gap-2
+                px-6 py-2.5 rounded-lg bg-indigo-600 text-white 
+                hover:bg-indigo-500 transition shadow-md
+            "
           >
-            <h3 className="text-2xl font-semibold text-white mb-6 tracking-wide">
-              Experience
-            </h3>
-
-            {resumeData?.work?.map((exp, index) => (
-              <motion.div
-                key={exp.id}
-                initial={{ opacity: 0, x: -25 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 + index * 0.1 }}
-                className="relative pl-6 mb-10 last:mb-0"
-              >
-                {/* Futuristic left line */}
-                <span className="absolute left-0 top-1 w-1 h-full bg-gradient-to-b from-indigo-500 to-purple-500 rounded-full" />
-
-                <div className="flex justify-between max-sm:flex-col max-sm:gap-1">
-                  <h4 className="text-xl font-semibold text-white">{exp.title}</h4>
-                  <span className="text-gray-300">{exp.startDate} - {exp.endDate}</span>
-                </div>
-
-                <p className="text-indigo-300 font-medium">{exp.company}</p>
-                <p className="text-gray-400 text-sm mb-2">{exp.location}</p>
-                <p className="text-gray-300 leading-relaxed">{exp.description}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* EDUCATION */}
-          <motion.div
-            initial={{ opacity: 0, x: 25 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="mb-12"
-          >
-            <h3 className="text-2xl font-semibold text-white mb-6 tracking-wide">
-              Education
-            </h3>
-
-            {resumeData?.education?.map((edu, index) => (
-              <motion.div
-                key={edu.id}
-                initial={{ opacity: 0, x: 25 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 + index * 0.1 }}
-                className="relative pl-6 mb-10 last:mb-0"
-              >
-                {/* timeline bar */}
-                <span className="absolute left-0 top-1 w-1 h-full bg-gradient-to-b from-purple-500 to-indigo-500 rounded-full" />
-
-                <div className="flex justify-between max-sm:flex-col max-sm:gap-1">
-                  <h4 className="text-xl font-semibold text-white">{edu.degree}</h4>
-                  <span className="text-gray-300">{edu.year}</span>
-                </div>
-
-                <p className="text-indigo-300 font-medium">{edu.school}</p>
-                <p className="text-gray-400 text-sm">{edu.field}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* SKILLS */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-          >
-            <h3 className="text-2xl font-semibold text-white mb-6 tracking-wide">
-              Skills
-            </h3>
-
-            <div className="flex flex-wrap gap-3">
-              {resumeData?.skills?.map((skill, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + index * 0.05 }}
-                  whileHover={{ scale: 1.08 }}
-                  className="px-4 py-1.5 rounded-full bg-indigo-500/20 border border-indigo-500/30 
-                  text-indigo-200 text-sm font-medium shadow hover:shadow-indigo-500/40 transition"
-                >
-                  {skill}
-                </motion.span>
-              ))}
-            </div>
-          </motion.div>
-
+            <BsDownload />
+            Download PDF
+          </motion.button>
         </motion.div>
-      </div>
 
-      {/* Neon glow style */}
-      <style>{`
-        .neon-card {
-          box-shadow:
-            0 0 25px rgba(99, 102, 241, 0.20),
-            inset 0 0 10px rgba(255, 255, 255, 0.03),
-            0 0 50px rgba(168, 85, 247, 0.15);
-        }
-      `}</style>
+        {/* BODY CONTAINER */}
+        <div
+          ref={resumeRef}
+          className="
+          bg-white/10 backdrop-blur-xl border border-white/10 
+          rounded-2xl p-10
+          "
+        >
+          {/* =================== SKELETON =================== */}
+          {loading && (
+            <div className="animate-pulse space-y-12">
+
+              {/* top profile skeleton */}
+              <div className="flex gap-6 items-center">
+                <div className="w-20 h-20 rounded-full bg-white/10" />
+                <div className="space-y-3">
+                  <div className="h-5 w-48 bg-white/10 rounded" />
+                  <div className="h-4 w-72 bg-white/10 rounded" />
+                </div>
+              </div>
+
+              {/* 2 section skeletons */}
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div key={i} className="space-y-3">
+                  <div className="h-5 w-40 bg-white/10 rounded" />
+                  <div className="h-3 w-full bg-white/10 rounded" />
+                  <div className="h-3 w-2/3 bg-white/10 rounded" />
+                </div>
+              ))}
+
+            </div>
+          )}
+
+          {/* =================== REAL DATA =================== */}
+          {!loading && resumeData && (
+            <div className="space-y-16 text-white">
+
+              {/* PROFILE */}
+              <div className="flex gap-6 items-center">
+                {resumeData.profile_image_url && (
+                  <img
+                    src={resumeData.profile_image_url}
+                    className="w-20 h-20 object-cover rounded-full border border-white/20"
+                  />
+                )}
+
+                <div>
+                  <h2 className="text-3xl font-semibold">
+                    {resumeData.name}
+                  </h2>
+
+                  <p className="text-gray-300 mt-2 max-w-2xl">
+                    {resumeData.summary}
+                  </p>
+                </div>
+              </div>
+
+              {/* WORK HISTORY */}
+              <section>
+                <h3 className="text-2xl font-semibold mb-6">Experience</h3>
+
+                {resumeData.work.map((exp) => (
+                  <div key={exp.id} className="mb-8 pl-4 border-l-2 border-indigo-500">
+
+                    <h4 className="text-xl font-semibold text-white">
+                      {exp.title}
+                    </h4>
+
+                    <p className="text-indigo-300 font-medium">
+                      {exp.company}
+                    </p>
+
+                    <p className="text-gray-400 text-sm">
+                      {exp.startDate} – {exp.endDate}
+                    </p>
+
+                    {exp.location && (
+                      <p className="text-gray-500 text-sm">{exp.location}</p>
+                    )}
+                  </div>
+                ))}
+              </section>
+
+              {/* EDUCATION */}
+              <section>
+                <h3 className="text-2xl font-semibold mb-6">Education</h3>
+
+                {resumeData.education.map((edu) => (
+                  <div key={edu.id} className="mb-6 pl-4 border-l-2 border-purple-500">
+
+                    <h4 className="text-xl font-semibold">
+                      {edu.degree}
+                    </h4>
+
+                    <p className="text-indigo-300">{edu.school}</p>
+                    <p className="text-gray-400 text-sm">{edu.field}</p>
+                    <p className="text-gray-500 text-sm">{edu.year}</p>
+
+                  </div>
+                ))}
+              </section>
+
+              {/* SKILLS */}
+              <section>
+                <h3 className="text-2xl font-semibold mb-6">Skills</h3>
+
+                <div className="flex flex-wrap gap-3">
+                  {resumeData.skills.map((skill, i) => (
+                    <span
+                      key={i}
+                      className="
+                        px-4 py-1.5 rounded-full 
+                        bg-indigo-500/20 border border-indigo-500/30 
+                        text-indigo-200 text-sm font-medium
+                      "
+                    >
+                      {skill.skill_name ? skill.skill_name : skill}
+                    </span>
+                  ))}
+                </div>
+              </section>
+
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

@@ -134,46 +134,46 @@ export default function Footer() {
 
             <div className="flex flex-row items-center gap-4 text-black">
               <Link
-                href={data.facebook_link || "javascript:void(0);"}
+                href="https://www.facebook.com/profile.php?id=61572455547421"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black cursor-pointer hover:text-[#27BAEE] transition duration-300"
+                className="text-black cursor-pointer hover:!text-[#27BAEE] transition duration-300"
               >
                 <FaFacebookF className="text-[22px]" />
               </Link>
 
               <Link
-                href={data.twitter_link || "javascript:void(0);"}
+                href="https://x.com/atswaysolutions"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black cursor-pointer hover:text-[#27BAEE] transition duration-300"
+                className="text-black cursor-pointer hover:!text-[#27BAEE] transition duration-300"
               >
                 <FaXTwitter className="text-[22px]" />
               </Link>
 
               <Link
-                href={data.instagram_link || "javascript:void(0);"}
+                href="https://www.instagram.com/atswayhrsoftware/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black cursor-pointer hover:text-[#27BAEE] transition duration-300"
+                className="text-black cursor-pointer hover:!text-[#27BAEE] transition duration-300"
               >
                 <FaInstagram className="text-[22px]" />
               </Link>
 
               <Link
-                href={data.linkedin_link || "javascript:void(0);"}
+                href="https://www.linkedin.com/company/atsway-hr-software/?viewAsMember=true"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black cursor-pointer hover:text-[#27BAEE] transition duration-300"
+                className="text-black cursor-pointer hover:!text-[#27BAEE] transition duration-300"
               >
                 <FiLinkedin className="text-[22px]" />
               </Link>
 
               <Link
-                href={data.pinterest_link || "javascript:void(0);"}
+                href="https://pinterest.com/atswayhrsoftware/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black cursor-pointer hover:text-[#27BAEE] transition duration-300"
+                className="text-black cursor-pointer hover:!text-[#27BAEE] transition duration-300"
               >
                 <FaPinterest className="text-[22px]" />
               </Link>

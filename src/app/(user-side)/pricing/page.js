@@ -46,9 +46,9 @@ const Page = () => {
 
               {/* Pricing Section */}
               <div className="rounded-lg border border-gray-300 shadow-md p-6 py-9 min-h-[300px] flex flex-col">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                <h1 className="text-2xl font-bold text-gray-900 mb-4">
                   ATSWAY Pricing – Simple, Transparent, and Powerful
-                </h2>
+                </h1>
 
                 <ul className="list-disc list-inside text-gray-700 mb-4">
                   <li>One Plan. Everything You Need.</li>

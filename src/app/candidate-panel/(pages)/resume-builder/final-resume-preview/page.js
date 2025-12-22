@@ -65,7 +65,13 @@ export default function FinalResume() {
       const response = await axios.post(
         BaseAPI + "/admin/candidates/save-profile",
         {
-          resume: payload,
+          personal: payload.personal,
+          education: payload.education,
+          work: payload.work,
+          skills: payload.skills,
+          projects: payload.projects,
+          achievements: payload.achievements,
+          summary: payload.summary,
         },
         {
           headers: {
@@ -80,6 +86,8 @@ export default function FinalResume() {
           icon: "success",
           title: "Resume Submitted",
           text: "Your resume has been submitted successfully.",
+        }).then(() => {
+          router.push("/candidate-panel/resume-listing");
         });
       } else {
         Swal.fire({
@@ -101,15 +109,15 @@ export default function FinalResume() {
     await submitToAPI();
 
     // Clear local storage after sending
-    localStorage.removeItem("rb_personal");
-    localStorage.removeItem("rb_education");
-    localStorage.removeItem("rb_work");
-    localStorage.removeItem("rb_skills");
-    localStorage.removeItem("rb_projects");
-    localStorage.removeItem("rb_achievements");
-    localStorage.removeItem("rb_summary");
+    // localStorage.removeItem("rb_personal");
+    // localStorage.removeItem("rb_education");
+    // localStorage.removeItem("rb_work");
+    // localStorage.removeItem("rb_skills");
+    // localStorage.removeItem("rb_projects");
+    // localStorage.removeItem("rb_achievements");
+    // localStorage.removeItem("rb_summary");
 
-    router.push("/candidate-panel/dashboard");
+    // router.push("/candidate-panel/dashboard");
   };
 
 

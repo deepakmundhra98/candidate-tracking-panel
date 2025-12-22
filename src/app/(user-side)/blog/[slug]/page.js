@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import Footer from "@/app/Components/Footer/Footer";
 import Header from "@/app/Components/Header";
 import BaseAPI from "@/app/BaseAPI/BaseAPI";
+import HTMLReactParser from "html-react-parser";
 
 const Page = ({ params }) => {
   const { slug } = params;
@@ -248,17 +249,35 @@ const Page = ({ params }) => {
             {blogData.image && (
               <Image
                 src={blogData.image}
-                width={975}
+                width={900}
                 height={450}
                 alt={blogData.subject}
                 className="rounded my-6"
               />
-            )}
+            )}                                                                                                            
 
             {/* Blog Content */}
-            <div className="prose max-w-none text-black">
-              {parse(blogData.blog_description || "")}
-            </div>
+            {/* <div className="prose max-w-none text-black">
+              {HTMLReactParser(blogData.blog_description || "")}
+            </div> */}
+
+            {/* <div className="prose prose-lg prose-neutral max-w-none">
+  {HTMLReactParser(blogData.blog_description || "")}
+</div> */}
+
+<div
+  className="
+    prose prose-lg prose-invert max-w-none
+    prose-ul:list-inside
+    prose-ol:list-inside
+    prose-ul:pl-0
+    prose-ol:pl-0
+  "
+>
+  {HTMLReactParser(blogData.blog_description || "")}
+</div>
+
+
 
             {/* Tags */}
             <div className="mt-6">
@@ -372,7 +391,7 @@ const Page = ({ params }) => {
 
                 <button
                   onClick={handlePostComment}
-                  className="mt-4 px-5 py-2 bg-blue-600 text-white rounded-md"
+                  className="mt-4 px-5 py-2 bg-[#27BAEE] hover:bg-[#209cc8]/80 text-white rounded-md"
                 >
                   POST COMMENT
                 </button>

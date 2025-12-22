@@ -959,7 +959,7 @@ const Page = () => {
           <div className="flex flex-col-reverse md:flex-row items-center container mx-auto px-4 sm:px-6 lg:px-8  justify-center  my-6">
             <div className="md:w-1/2 p-6  rounded-lg flex items-center justify-center">
               <img
-                src="/Images/home/features/12.png"
+                src="/Images/home/features/1-old.png"
                 alt="Illustration of people managing candidate tracking on a large screen with checkmarks and graphs"
                 className="w-full h-auto"
               />
@@ -1138,7 +1138,7 @@ const Page = () => {
                     search trends with easy-to-read charts and graphs.
                   </li>
                   <li>
-                    <b>Custom Insights & Suggestions:</b> Receive tailored
+                    <b>Custom Insights & Suggestions:</b> Receive customized
                     advice to optimize your resume, applications, and skills for
                     future success.
                   </li>

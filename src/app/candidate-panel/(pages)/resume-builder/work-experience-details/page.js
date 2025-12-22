@@ -188,7 +188,7 @@ export default function WorkExperience() {
 
                   {/* Job Title */}
                   <div>
-                    <label className="text-gray-300 text-sm">Job Title</label>
+                    <label className="text-gray-300 text-sm">Job Title <span className="text-red-400">*</span></label>
                     <input
                       type="text"
                       value={exp.job_title}
@@ -212,7 +212,7 @@ export default function WorkExperience() {
 
                   {/* Company */}
                   <div>
-                    <label className="text-gray-300 text-sm">Company</label>
+                    <label className="text-gray-300 text-sm">Company <span className="text-red-400">*</span></label>
                     <input
                       type="text"
                       value={exp.company}
@@ -236,7 +236,7 @@ export default function WorkExperience() {
 
                   {/* Start Date */}
                   <div>
-                    <label className="text-gray-300 text-sm">Start Date</label>
+                    <label className="text-gray-300 text-sm">Start Date <span className="text-red-400">*</span></label>
                     <input
                       type="month"
                       value={exp.start_date}
@@ -260,7 +260,7 @@ export default function WorkExperience() {
                   {/* End Date + Ongoing */}
                   <div>
                     <div className="flex items-center justify-between">
-                      <label className="text-gray-300 text-sm">End Date</label>
+                      <label className="text-gray-300 text-sm">End Date <span className="text-red-400">*</span></label>
 
                       <label className="flex items-center space-x-2 text-gray-300 text-xs cursor-pointer">
                         <input
@@ -301,7 +301,7 @@ export default function WorkExperience() {
 
                   {/* Description */}
                   <div className="col-span-2">
-                    <label className="text-gray-300 text-sm">Job Description</label>
+                    <label className="text-gray-300 text-sm">Job Description <span className="text-red-400">*</span></label>
                     <textarea
                       rows="4"
                       value={exp.description}

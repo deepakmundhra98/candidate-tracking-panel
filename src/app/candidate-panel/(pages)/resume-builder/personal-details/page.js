@@ -49,7 +49,8 @@ export default function PersonalDetails() {
   const validate = () => {
     let temp = {};
 
-    if (!formData.first_name.trim()) temp.first_name = "First name is required.";
+    if (!formData.first_name.trim())
+      temp.first_name = "First name is required.";
     if (!formData.last_name.trim()) temp.last_name = "Last name is required.";
     if (!formData.email.trim()) temp.email = "Email is required.";
     else if (!/\S+@\S+\.\S+/.test(formData.email))
@@ -113,142 +114,140 @@ export default function PersonalDetails() {
 
         <div className="space-y-8">
           {/* Full Name */}
-<div>
-  <label className="text-gray-300 text-sm font-medium">
-    First Name <span className="text-red-400">*</span>
-  </label>
-  <input
-    type="text"
-    name="first_name"
-    value={formData.first_name}
-    onChange={handleChange}
-    className={`w-full mt-2 px-4 py-3 bg-white/10 border rounded-xl text-gray-100 
+          <div>
+            <label className="text-gray-300 text-sm font-medium">
+              First Name <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="text"
+              name="first_name"
+              value={formData.first_name}
+              onChange={handleChange}
+              className={`w-full mt-2 px-4 py-3 bg-white/10 border rounded-xl text-gray-100 
       ${
         errors.first_name
           ? "border-red-400 focus:ring-2 focus:ring-red-400"
           : "border-white/20 focus:ring-2 focus:ring-indigo-500"
       }`}
-    placeholder="John Doe"
-  />
-  {errors.first_name && (
-    <p className="text-red-400 text-sm mt-1">{errors.first_name}</p>
-  )}
-</div>
-<div>
-  <label className="text-gray-300 text-sm font-medium">
-    Last Name <span className="text-red-400">*</span>
-  </label>
-  <input
-    type="text"
-    name="last_name"
-    value={formData.last_name}
-    onChange={handleChange}
-    className={`w-full mt-2 px-4 py-3 bg-white/10 border rounded-xl text-gray-100 
+              placeholder="John Doe"
+            />
+            {errors.first_name && (
+              <p className="text-red-400 text-sm mt-1">{errors.first_name}</p>
+            )}
+          </div>
+          <div>
+            <label className="text-gray-300 text-sm font-medium">
+              Last Name <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="text"
+              name="last_name"
+              value={formData.last_name}
+              onChange={handleChange}
+              className={`w-full mt-2 px-4 py-3 bg-white/10 border rounded-xl text-gray-100 
       ${
         errors.last_name
           ? "border-red-400 focus:ring-2 focus:ring-red-400"
           : "border-white/20 focus:ring-2 focus:ring-indigo-500"
       }`}
-    placeholder="John Doe"
-  />
-  {errors.last_name && (
-    <p className="text-red-400 text-sm mt-1">{errors.last_name}</p>
-  )}
-</div>
+              placeholder="John Doe"
+            />
+            {errors.last_name && (
+              <p className="text-red-400 text-sm mt-1">{errors.last_name}</p>
+            )}
+          </div>
 
-
-{/* Email */}
-<div>
-  <label className="text-gray-300 text-sm font-medium">
-    Email Address <span className="text-red-400">*</span>
-  </label>
-  <input
-    type="email"
-    name="email"
-    value={formData.email}
-    onChange={handleChange}
-    className={`w-full mt-2 px-4 py-3 bg-white/10 border rounded-xl text-gray-100 
+          {/* Email */}
+          <div>
+            <label className="text-gray-300 text-sm font-medium">
+              Email Address <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className={`w-full mt-2 px-4 py-3 bg-white/10 border rounded-xl text-gray-100 
       ${
         errors.email
           ? "border-red-400 focus:ring-2 focus:ring-red-400"
           : "border-white/20 focus:ring-2 focus:ring-indigo-500"
       }`}
-    placeholder="john@example.com"
-  />
-  {errors.email && (
-    <p className="text-red-400 text-sm mt-1">{errors.email}</p>
-  )}
-</div>
+              placeholder="john@example.com"
+            />
+            {errors.email && (
+              <p className="text-red-400 text-sm mt-1">{errors.email}</p>
+            )}
+          </div>
 
-{/* Phone */}
-<div>
-  <label className="text-gray-300 text-sm font-medium">
-    Phone Number <span className="text-red-400">*</span>
-  </label>
-  <input
-    type="text"
-    name="phone"
-    value={formData.phone}
-    onChange={handleChange}
-    className={`w-full mt-2 px-4 py-3 bg-white/10 border rounded-xl text-gray-100 
+          {/* Phone */}
+          <div>
+            <label className="text-gray-300 text-sm font-medium">
+              Phone Number <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className={`w-full mt-2 px-4 py-3 bg-white/10 border rounded-xl text-gray-100 
       ${
         errors.phone
           ? "border-red-400 focus:ring-2 focus:ring-red-400"
           : "border-white/20 focus:ring-2 focus:ring-purple-500"
       }`}
-    placeholder="+91 9876543210"
-  />
-  {errors.phone && (
-    <p className="text-red-400 text-sm mt-1">{errors.phone}</p>
-  )}
-</div>
+              placeholder="+91 9876543210"
+            />
+            {errors.phone && (
+              <p className="text-red-400 text-sm mt-1">{errors.phone}</p>
+            )}
+          </div>
 
-{/* Location */}
-<div>
-  <label className="text-gray-300 text-sm font-medium">
-    Location <span className="text-red-400">*</span>
-  </label>
-  <input
-    type="text"
-    name="location"
-    value={formData.location}
-    onChange={handleChange}
-    className={`w-full mt-2 px-4 py-3 bg-white/10 border rounded-xl text-gray-100 
+          {/* Location */}
+          <div>
+            <label className="text-gray-300 text-sm font-medium">
+              Location <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="text"
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+              className={`w-full mt-2 px-4 py-3 bg-white/10 border rounded-xl text-gray-100 
       ${
         errors.location
           ? "border-red-400 focus:ring-2 focus:ring-red-400"
           : "border-white/20 focus:ring-2 focus:ring-purple-500"
       }`}
-    placeholder="Mumbai, India"
-  />
-  {errors.location && (
-    <p className="text-red-400 text-sm mt-1">{errors.location}</p>
-  )}
-</div>
+              placeholder="Mumbai, India"
+            />
+            {errors.location && (
+              <p className="text-red-400 text-sm mt-1">{errors.location}</p>
+            )}
+          </div>
 
-{/* Headline */}
-<div>
-  <label className="text-gray-300 text-sm font-medium">
-    Professional Headline <span className="text-red-400">*</span>
-  </label>
-  <input
-    type="text"
-    name="headline"
-    value={formData.headline}
-    onChange={handleChange}
-    className={`w-full mt-2 px-4 py-3 bg-white/10 border rounded-xl text-gray-100 
+          {/* Headline */}
+          <div>
+            <label className="text-gray-300 text-sm font-medium">
+              Professional Headline <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="text"
+              name="headline"
+              value={formData.headline}
+              onChange={handleChange}
+              className={`w-full mt-2 px-4 py-3 bg-white/10 border rounded-xl text-gray-100 
       ${
         errors.headline
           ? "border-red-400 focus:ring-2 focus:ring-red-400"
           : "border-white/20 focus:ring-2 focus:ring-purple-500"
       }`}
-    placeholder="Software Developer | React | Node.js"
-  />
-  {errors.headline && (
-    <p className="text-red-400 text-sm mt-1">{errors.headline}</p>
-  )}
-</div>
-
+              placeholder="Software Developer | React | Node.js"
+            />
+            {errors.headline && (
+              <p className="text-red-400 text-sm mt-1">{errors.headline}</p>
+            )}
+          </div>
         </div>
 
         {/* BUTTONS */}

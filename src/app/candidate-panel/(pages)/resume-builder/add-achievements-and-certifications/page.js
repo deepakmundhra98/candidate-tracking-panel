@@ -86,13 +86,13 @@ export default function AchievementsStep() {
                   </div>
 
                   <div className="col-span-2">
-                    <label className="text-gray-300 text-sm">Title</label>
+                    <label className="text-gray-300 text-sm">Title <span className="text-red-400">*</span></label>
                     <input value={i.title} onChange={(e)=>handleChange(i.id,"title",e.target.value)} className={`w-full mt-2 px-4 py-3 bg-white/10 border rounded-xl text-gray-100 ${errors[`${i.id}-title`] ? "border-red-400" : "border-white/20"}`} placeholder="Certified Kubernetes Administrator" />
                     {errors[`${i.id}-title`] && <p className="text-red-400 text-sm mt-1">{errors[`${i.id}-title`]}</p>}
                   </div>
 
                   <div>
-                    <label className="text-gray-300 text-sm">Year</label>
+                    <label className="text-gray-300 text-sm">Year <span className="text-red-400">*</span></label>
                     <input value={i.year} onChange={(e)=>handleChange(i.id,"year",e.target.value)} className={`w-full mt-2 px-4 py-3 bg-white/10 border rounded-xl text-gray-100 ${errors[`${i.id}-year`] ? "border-red-400" : "border-white/20"}`} placeholder="2024" />
                     {errors[`${i.id}-year`] && <p className="text-red-400 text-sm mt-1">{errors[`${i.id}-year`]}</p>}
                   </div>

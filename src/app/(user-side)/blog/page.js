@@ -170,14 +170,14 @@ const Page = () => {
                     <div key={blog.id} className="bg-white shadow-lg rounded-lg p-6 mb-6">
 
                       {/* Title */}
-                      <h1 className="text-xl font-semibold">
+                      <p className="text-xl font-semibold">
                         <Link
                           href={`/blog/${blog.slug}`}
                           className="text-[#27baee] hover:text-[#209cc8]"
                         >
                           {blog.subject}
                         </Link>
-                      </h1>
+                      </p>
 
                       {/* Date + Category */}
                       <p className="text-sm text-gray-500 mt-2">

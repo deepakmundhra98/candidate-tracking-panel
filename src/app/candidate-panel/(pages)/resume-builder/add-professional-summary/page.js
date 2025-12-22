@@ -44,8 +44,8 @@ export default function SummaryStep() {
       <motion.div initial={{opacity:0,x:40}} animate={{opacity:1,x:0}} transition={{duration:0.6}}
         className={`min-w-[900px] backdrop-blur-3xl bg-white/10 border border-white/20 shadow-xl rounded-3xl p-10 neon-card ${shake ? "animate-shake" : ""}`}>
 
-        <h1 className="text-3xl font-semibold text-white text-center">Step 7: Professional Summary</h1>
-        <p className="text-gray-300 text-sm text-center mt-2 mb-6">Write a strong professional summary (minimum 30 words).</p>
+        <h1 className="text-3xl font-semibold text-white text-center">Step 7: Professional Summary </h1>
+        <p className="text-gray-300 text-sm text-center mt-2 mb-6">Write a strong professional summary (minimum 15 words). <span className="text-red-400">*</span></p>
 
         <textarea value={summary} onChange={(e)=>{ setSummary(e.target.value); setError(""); }} rows={14}
           className="w-full px-4 py-4 bg-white/10 border border-white/20 rounded-xl text-gray-100 focus:ring-2 focus:ring-indigo-500" placeholder="Write your professional summary here..." />

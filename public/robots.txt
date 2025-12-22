@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.atsway.com/sitemap.xml
+Sitemap: https://www.atsway.com/pages-sitemap.xml
+Sitemap: https://www.atsway.com/blog-sitemap.xml

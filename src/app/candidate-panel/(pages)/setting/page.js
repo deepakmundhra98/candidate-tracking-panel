@@ -93,7 +93,7 @@ export default function SettingsMultipleCards() {
   };
 
   return (
-    <div className="relative p-6 min-h-screen">
+    <div className="relative min-h-screen px-6 py-14">
       {/* Background */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#0f1124] via-[#15172e] to-[#080912]" />
 
@@ -102,17 +102,21 @@ export default function SettingsMultipleCards() {
         {/* Header */}
         <motion.header initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-between items-start">
           <div>
-            <h1 className="text-3xl font-semibold text-white">Settings</h1>
-            <p className="text-gray-300 mt-1">Manage account, notifications, privacy, and security.</p>
+            <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
+            Setting
+          </h1>
+          <p className="text-gray-400 mt-4 max-w-2xl text-lg">
+            Manage account, notifications, privacy, and security.
+          </p>
+
+          <div className="mt-6 h-1 w-24 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" />
+            
           </div>
 
-          <div className="flex items-center gap-3">
-            <button onClick={handleSubmit} className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-lg">
-              Save
-            </button>
-          </div>
+          
         </motion.header>
-
+{/* CARDS */}
+        <div className="space-y-6">
         
 
         {/* Change Password Card */}
@@ -143,6 +147,7 @@ export default function SettingsMultipleCards() {
             Delete Account
           </button>
         </DangerCard>
+        </div>
       </div>
 
       {/* CHANGE PASSWORD MODAL */}

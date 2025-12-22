@@ -11,6 +11,8 @@ import axios from "axios";
 import BaseAPI from "@/app/BaseAPI/BaseAPI";
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -23,6 +25,7 @@ export default function Page() {
   const router = useRouter();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+const [showPassword, setShowPassword] = useState(false);
 
   // API Login Handler
   const handleLogin = async ({ email, password }) => {
@@ -42,7 +45,7 @@ export default function Page() {
 
       if(response.data.status === 200) {
         Cookies.set("tokenCandidate", response.data.token);
-        Cookies.set("candidateData", JSON.stringify(response.data.user));
+        Cookies.set("candidateData", JSON.stringify(response.data.candidate));
         Cookies.set("userType", response.data.userType);
 
 
@@ -127,24 +130,41 @@ export default function Page() {
               </div>
 
               {/* Password */}
-              <div className="mb-6">
-                <label htmlFor="password" className="sr-only">
-                  Password
-                </label>
-                <Field
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  placeholder="Password"
-                  className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-900 bg-white focus:outline-none focus:border-[#87e0ff] focus:ring-2 focus:ring-[#87e0ff]"
-                />
-                {errors.password && touched.password && (
-                  <p className="text-xs text-red-600 mt-1">
-                    {errors.password}
-                  </p>
-                )}
-              </div>
+              {/* Password */}
+<div className="mb-6 relative">
+  <label htmlFor="password" className="sr-only">
+    Password
+  </label>
+
+  <Field
+    id="password"
+    name="password"
+    type={showPassword ? "text" : "password"}
+    required
+    placeholder="Password"
+    className="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md text-sm text-gray-900 bg-white focus:outline-none focus:border-[#87e0ff] focus:ring-2 focus:ring-[#87e0ff]"
+  />
+
+  {/* Eye Icon */}
+  <button
+    type="button"
+    onClick={() => setShowPassword(!showPassword)}
+    className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
+  >
+    {showPassword ? (
+      <VisibilityOffIcon fontSize="small" />
+    ) : (
+      <VisibilityIcon fontSize="small" />
+    )}
+  </button>
+
+  {errors.password && touched.password && (
+    <p className="text-xs text-red-600 mt-1">
+      {errors.password}
+    </p>
+  )}
+</div>
+
 
               {/* Remember Me + Forgot Password */}
               <div className="flex items-center justify-between mb-6">

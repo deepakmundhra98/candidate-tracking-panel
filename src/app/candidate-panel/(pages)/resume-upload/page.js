@@ -3,10 +3,16 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BsFileEarmarkPdf, BsTrash } from "react-icons/bs";
-
+import axios from "axios";
+import BaseAPI from "@/app/BaseAPI/BaseAPI";
+import Cookies from "js-cookie";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 export default function ResumeUpload() {
   const [resumeFile, setResumeFile] = useState(null);
   const [resumeURL, setResumeURL] = useState(null);
+  const token = Cookies.get("tokenCandidate");
+  const router = useRouter();
 
 
   const handleUpload = (e) => {
@@ -15,11 +21,40 @@ export default function ResumeUpload() {
 
     setResumeFile(file);
     setResumeURL(URL.createObjectURL(file)); // preview in browser
+    sendToServer(file); // send to backend
   };
 
   const handleDelete = () => {
     setResumeFile(null);
     setResumeURL(null);
+  };
+
+  const sendToServer = async (file) => {
+    const formData = new FormData();
+    formData.append("resume", file);
+
+    try {
+      const response = await axios.post(BaseAPI + "/admin/candidates/parseCandidateResume", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if(response.data.status === 200) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Resume Uploaded Successfully',
+          showConfirmButton: false,
+          timer: 1500
+        }).then(() => {
+          router.push('/candidate-panel/resume-listing');
+        });
+      }
+      console.log("Upload successful:", response.data);
+    } catch (error) {
+      console.error("Error uploading resume:", error);
+    }
   };
 
   return (
