@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { BsArrowRight } from "react-icons/bs";
 
 export default function ResumeBuilderWelcome() {
   return (
@@ -69,7 +70,7 @@ export default function ResumeBuilderWelcome() {
             text-lg font-medium rounded-xl shadow-lg hover:shadow-purple-500/40 
             transition-all duration-300 inline-block"
           >
-            Let&apos;s Start →
+            Let&apos;s Start <BsArrowRight className="text-2xl" />
           </Link>
         </motion.div>
       </motion.div>

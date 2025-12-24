@@ -7,6 +7,8 @@ import axios from "axios";
 import BaseAPI from "@/app/BaseAPI/BaseAPI";
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 export default function FinalResume() {
   const router = useRouter();
@@ -121,94 +123,42 @@ export default function FinalResume() {
   };
 
 
-  const downloadPDF = async () => {
-    if (!resumeRef.current) return;
-    setDownloading(true);
-    try {
-      const html2canvas = (await import("html2canvas")).default;
-      const { jsPDF } = await import("jspdf");
+const downloadPDF = async () => {
+  if (!resumeRef.current) return;
 
-      // Increase scale for quality
-      const canvas = await html2canvas(resumeRef.current, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-      });
-      const imgData = canvas.toDataURL("image/png");
+  const canvas = await html2canvas(resumeRef.current, {
+    scale: 2,
+    backgroundColor: "#0e1125",
+    useCORS: true,
+    allowTaint: false,
+  });
 
-      // A4 dimension in px at 96dpi approx: 595 x 842 (but we'll compute based on canvas)
-      const pdf = new jsPDF("p", "pt", "a4");
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
+  const imgData = canvas.toDataURL("image/png");
+  const pdf = new jsPDF("p", "mm", "a4");
 
-      // Calculate image dims to fit width
-      const imgProps = { width: canvas.width, height: canvas.height };
-      const ratio = imgProps.width / pdfWidth;
-      const imgHeight = imgProps.height / ratio;
+  const pdfWidth = pdf.internal.pageSize.getWidth();
+  const pdfHeight = pdf.internal.pageSize.getHeight();
 
-      // If content height fits 1 page:
-      if (imgHeight <= pdfHeight) {
-        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, imgHeight);
-      } else {
-        // If long, split into pages
-        let heightLeft = imgHeight;
-        let position = 0;
-        let pageCanvasHeight = pdfHeight * ratio;
-        let page = 0;
+  const imgHeight = (canvas.height * pdfWidth) / canvas.width;
 
-        while (heightLeft > 0) {
-          const pageCanvas = document.createElement("canvas");
-          pageCanvas.width = canvas.width;
-          pageCanvas.height = Math.min(
-            pageCanvasHeight,
-            canvas.height - page * pageCanvasHeight
-          );
-          const ctx = pageCanvas.getContext("2d");
-          ctx.drawImage(
-            canvas,
-            0,
-            page * pageCanvasHeight,
-            canvas.width,
-            pageCanvas.height,
-            0,
-            0,
-            canvas.width,
-            pageCanvas.height
-          );
-          const pageData = pageCanvas.toDataURL("image/png");
-          if (page === 0) {
-            pdf.addImage(
-              pageData,
-              "PNG",
-              0,
-              0,
-              pdfWidth,
-              pageCanvas.height / ratio
-            );
-          } else {
-            pdf.addPage();
-            pdf.addImage(
-              pageData,
-              "PNG",
-              0,
-              0,
-              pdfWidth,
-              pageCanvas.height / ratio
-            );
-          }
-          heightLeft -= pageCanvasHeight;
-          page++;
-        }
-      }
+  let heightLeft = imgHeight;
+  let position = 0;
 
-      pdf.save(`${(personal?.full_name || "resume").replace(/\s+/g, "_")}.pdf`);
-    } catch (err) {
-      console.error("PDF export failed", err);
-      alert("Failed to generate PDF. See console for details.");
-    } finally {
-      setDownloading(false);
-    }
-  };
+  while (heightLeft > 0) {
+    // 🔥 Fill background
+    pdf.setFillColor(14, 17, 37); // #0e1125
+    pdf.rect(0, 0, pdfWidth, pdfHeight, "F");
+
+    pdf.addImage(imgData, "PNG", 0, position, pdfWidth, imgHeight);
+
+    heightLeft -= pdfHeight;
+    position -= pdfHeight;
+
+    if (heightLeft > 0) pdf.addPage();
+  }
+
+  pdf.save("My_Resume.pdf");
+};
 
   return (
     <div className="p-6 relative min-h-screen">

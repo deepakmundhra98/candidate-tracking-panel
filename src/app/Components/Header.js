@@ -9,9 +9,10 @@ import axios from "axios";
 import { FaBars } from "react-icons/fa6";
 import DemoModal from "./DemoModal";
 import BaseAPI from "../BaseAPI/BaseAPI";
+import Cookies from "js-cookie";
+import { BsPersonFill } from "react-icons/bs";
 
 export default function Header() {
-
   const pathname = usePathname();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,10 +35,16 @@ export default function Header() {
   const isActive = (path) => {
     if (path === "/" && pathname === "/") return "text-[#27BAEE]";
 
-    if (path === "/blog" && pathname.startsWith("/blog")) return "text-[#27BAEE]";
+    if (path === "/blog" && pathname.startsWith("/blog"))
+      return "text-[#27BAEE]";
 
     return pathname === path ? "text-[#27BAEE]" : "text-gray-500";
   };
+
+  const raw = Cookies.get("candidateData");
+  if (!raw) return null;
+  const decoded = decodeURIComponent(raw);
+  let actualUserData = JSON.parse(decoded);
 
   return (
     <div className="border-b">
@@ -62,7 +69,9 @@ export default function Header() {
             <div className="hidden lg:flex items-center space-x-6 md:space-x-8">
               <Link href="/" className="text-sm">
                 <div
-                  className={`flex text-lg hover:text-[#27BAEE] ${isActive("/")}`}
+                  className={`flex text-lg hover:text-[#27BAEE] ${isActive(
+                    "/"
+                  )}`}
                 >
                   Home
                 </div>
@@ -110,21 +119,29 @@ export default function Header() {
             </div>
           </div>
 
-          <div className="hidden lg:flex items-center space-x-6 md:space-x-8">
-            {/* REQUEST DEMO BUTTON */}
-            <Link
-              href="/candidate-panel/login"
-              className="hidden lg:flex bg-[#27BAEE] font-medium text-white px-4 py-2 rounded"
-            >
-              Candidate Login
-            </Link>
-            {/* <button
-            onClick={() => setIsModalOpen(true)}
-            className="hidden lg:flex bg-blue-600 font-medium text-white px-4 py-2 rounded"
-          >
-            Request a Demo
-          </button>// */}
-          </div>
+          {actualUserData.first_name ? (
+            <>
+              <Link
+                href="/candidate-panel/profile"
+                className="text-[#27BAEE] hover:text-[#209cc8] hidden lg:flex items-center space-x-6 md:space-x-2"
+              >
+                <BsPersonFill className="" />
+                <span className="">
+                  {actualUserData.first_name} {actualUserData.last_name}
+                </span>
+              </Link>
+            </>
+          ) : (
+            <div className="hidden lg:flex items-center space-x-6 md:space-x-8">
+              {/* REQUEST DEMO BUTTON */}
+              <Link
+                href="/candidate-panel/login"
+                className="hidden lg:flex bg-[#27BAEE] font-medium text-white px-4 py-2 rounded"
+              >
+                Candidate Login
+              </Link>
+            </div>
+          )}
 
           {/* MOBILE MENU TOGGLE */}
           <div className="lg:hidden flex items-center">
@@ -189,12 +206,26 @@ export default function Header() {
               Pricing
             </Link>
 
-            <Link
-              href="/candidate-panel/login"
-              className="bg-[#27BAEE] text-center text-white px-4 py-2 rounded"
-            >
-              Candidate Login
-            </Link>
+            {actualUserData.first_name ? (
+              <>
+                <Link
+                  href="/candidate-panel/profile"
+                  className="text-[#27BAEE] hover:text-[#209cc8] hidden lg:flex items-center space-x-6 md:space-x-2"
+                >
+                  <BsPersonFill className="" />
+                  <span className="">
+                    {actualUserData.first_name} {actualUserData.last_name}
+                  </span>
+                </Link>
+              </>
+            ) : (
+              <Link
+                href="/candidate-panel/login"
+                className="bg-[#27BAEE] text-center text-white px-4 py-2 rounded"
+              >
+                Candidate Login
+              </Link>
+            )}
 
             {/* <button
               onClick={() => setIsModalOpen(true)}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { BsTrash } from "react-icons/bs";
+import { BsArrowLeft, BsArrowRight, BsTrash } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 
 export default function AchievementsStep() {
@@ -117,8 +117,40 @@ export default function AchievementsStep() {
         </div>
 
         <div className="mt-8 flex justify-between">
-          <button onClick={handleBack} className="px-8 py-3 bg-white/10 border border-white/20 rounded-xl text-white">Back</button>
-          <button onClick={handleNext} className="px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl">Next →</button>
+          {/* BACK */}
+          <button
+            onClick={handleBack}
+            className="
+              inline-flex items-center gap-2
+              px-8 py-3
+              bg-white/10 border border-white/20
+              rounded-xl text-white
+              hover:bg-white/15 transition
+            "
+          >
+            <BsArrowLeft className="text-2xl" /> Back
+          </button>
+        
+          {/* NEXT */}
+          <button
+            onClick={handleNext}
+            className="
+              group inline-flex items-center gap-3
+              px-8 py-3
+              bg-gradient-to-r from-indigo-500 to-purple-600
+              text-white rounded-xl
+              hover:shadow-lg transition
+            "
+          >
+            Next
+            <BsArrowRight
+              className="
+                text-2xl
+                transform transition-transform
+                group-hover:translate-x-1
+              "
+            />
+          </button>
         </div>
 
       </motion.div>

@@ -41,7 +41,7 @@ export default function StepTwo() {
 
     console.log("Form valid → Generate score!");
 
-    router.push("/candidate-panel/job-matching/match-score");
+    router.push("/candidate-panel/job-compatibility-test/match-score");
   };
 
   return (

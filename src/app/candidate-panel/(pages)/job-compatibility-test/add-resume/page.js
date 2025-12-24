@@ -106,7 +106,7 @@ export default function StepOne() {
                 : "bg-gray-600/20 border-gray-400/20 text-gray-400 cursor-not-allowed"
             }`}
         >
-          <Link href="/candidate-panel/job-matching/add-job-description">
+          <Link href="/candidate-panel/job-compatibility-test/add-job-description">
           Continue to Job Details
           </Link>
         </motion.button>

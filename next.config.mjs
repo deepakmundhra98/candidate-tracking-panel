@@ -8,7 +8,8 @@ const nextConfig = {
       "rms-next-backend.logicspice.in",
       "rms-next.logicspice.com",
       "rms-next-backend.logicspice.com",
-      "media.licdn.com"
+      "media.licdn.com",
+      "via.placeholder.com"
     ],
   },
 

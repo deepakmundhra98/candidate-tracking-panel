@@ -5,42 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import BaseAPI from "@/app/BaseAPI/BaseAPI";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { BsPersonFill } from "react-icons/bs";
+import { BsPersonFill, BsTrash } from "react-icons/bs";
 import Image from "next/image";
+import Swal from "sweetalert2";
 
 export default function SavedJobs() {
-  const [savedJobs, setSavedJobs] = useState([
-    {
-      id: 1,
-      title: "Senior Product Designer",
-      company: "TechCorp",
-      location: "San Francisco, CA",
-      type: "Full-time",
-      posted: "2 days ago",
-      salary: "$120,000 - $150,000",
-      logo: "https://via.placeholder.com/40",
-    },
-    {
-      id: 2,
-      title: "UX/UI Designer",
-      company: "DesignHub",
-      location: "Remote",
-      type: "Contract",
-      posted: "1 week ago",
-      salary: "$80 - $100/hr",
-      logo: "https://via.placeholder.com/40/0000FF/FFFFFF?text=DH",
-    },
-    {
-      id: 3,
-      title: "Lead Product Designer",
-      company: "InnovateX",
-      location: "New York, NY",
-      type: "Full-time",
-      posted: "3 days ago",
-      salary: "$140,000 - $180,000",
-      logo: "https://via.placeholder.com/40/FF0000/FFFFFF?text=IX",
-    },
-  ]);
+  const [savedJobs, setSavedJobs] = useState([]);
 
   const token = Cookies.get("tokenCandidate");
 
@@ -70,8 +40,30 @@ export default function SavedJobs() {
     getSavedJobs();
   }, []);
 
-  const removeJob = (id) => {
-    setSavedJobs(savedJobs.filter((job) => job.id !== id));
+  const removeJob = async (id) => {
+    try {
+      const response = await axios.post(
+        BaseAPI + "/admin/delete-saved-job",
+        { id: id },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      if (response.data.status === 200) {
+        setSavedJobs(savedJobs.filter((job) => job.id !== id));
+
+        Swal.fire({
+          icon: "success",
+          title: "Removed",
+          text: "Job removed from saved list.",
+        });
+      }
+    } catch (error) {
+      console.log("Error removing saved job:", error.message);
+    }
   };
 
   return (
@@ -152,17 +144,15 @@ export default function SavedJobs() {
                     <div className="flex gap-4">
                       {job.logo ? (
                         <Image
-                        width={100}
-                        height={100}
-                        src={job.logo}
-                        alt="logo"
-                        className="h-16 w-16 rounded-full border border-white/20 shadow-lg object-cover"
-                      />
-                      ) :(
-                                        <BsPersonFill className="text-white text-xl" />
-                        
+                          width={100}
+                          height={100}
+                          src={job.logo}
+                          alt="logo"
+                          className="h-16 w-16 rounded-full border border-white/20 shadow-lg object-cover"
+                        />
+                      ) : (
+                        <BsPersonFill className="text-white text-xl" />
                       )}
-                      
 
                       <div>
                         <h3 className="text-xl font-semibold text-white">
@@ -185,36 +175,32 @@ export default function SavedJobs() {
                     </div>
 
                     {/* ACTION BUTTONS */}
-                    <div className="flex gap-3">
-                      <motion.button
-                        whileTap={{ scale: 0.95 }}
-                        className="px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 
-                      text-white shadow-md hover:shadow-purple-400/40 transition"
-                      >
-                        Apply
-                      </motion.button>
+                    <div className="flex items-center gap-3">
+  <motion.button
+    whileTap={{ scale: 0.95 }}
+    className="
+      px-5 py-2 rounded-lg 
+      bg-gradient-to-r from-indigo-500 to-purple-600
+      text-white shadow-md hover:shadow-purple-400/40 transition
+    "
+  >
+    Apply
+  </motion.button>
 
-                      <motion.button
-                        whileTap={{ scale: 0.85 }}
-                        onClick={() => removeJob(job.id)}
-                        className="p-2 rounded-full bg-white/10 border border-white/20 text-gray-300 
-                      hover:bg-white/20 hover:text-white shadow-inner transition"
-                      >
-                        <svg
-                          className="h-6 w-6"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 
-                        1.414L11.414 10l4.293 4.293a1 1 
-                        0 01-1.414 1.414L10 11.414l-4.293 
-                        4.293a1 1 0 01-1.414-1.414L8.586 
-                        10 4.293 5.707a1 1 0 010-1.414z"
-                          />
-                        </svg>
-                      </motion.button>
-                    </div>
+  <motion.button
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.92 }}
+    onClick={() => removeJob(job.id)}
+    className="
+      p-2 rounded-lg
+      bg-red-500/20 border border-red-400/30
+      text-red-300 hover:bg-red-500/30 transition
+    "
+  >
+    <BsTrash />
+  </motion.button>
+</div>
+
                   </div>
                 </motion.div>
               ))

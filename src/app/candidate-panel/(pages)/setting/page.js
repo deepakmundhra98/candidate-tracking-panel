@@ -3,12 +3,26 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
+import BaseAPI from "@/app/BaseAPI/BaseAPI";
+import Cookies from "js-cookie";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 function useSettingsState() {
   const [settings, setSettings] = useState({
     email: "john.doe@example.com",
-    notifications: { email: true, push: true, jobAlerts: true, newsletter: false },
-    privacy: { profileVisibility: "public", showEmail: false, showPhone: false },
+    notifications: {
+      email: true,
+      push: true,
+      jobAlerts: true,
+      newsletter: false,
+    },
+    privacy: {
+      profileVisibility: "public",
+      showEmail: false,
+      showPhone: false,
+    },
   });
 
   return { settings, setSettings };
@@ -21,13 +35,16 @@ export default function SettingsMultipleCards() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const [passwordData, setPasswordData] = useState({
-    current: "",
-    newPass: "",
-    confirm: "",
+    old_password: "",
+    new_password: "",
+    confirm_password: "",
   });
 
   const [passErrors, setPassErrors] = useState({});
   const [strength, setStrength] = useState("");
+
+  const token = Cookies.get("tokenCandidate");
+  const router = useRouter();
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target;
@@ -37,7 +54,7 @@ export default function SettingsMultipleCards() {
     setPassErrors((p) => ({ ...p, [name]: "" }));
 
     // Password Strength Check
-    if (name === "newPass") {
+    if (name === "new_password") {
       checkStrength(value);
     }
   };
@@ -52,45 +69,89 @@ export default function SettingsMultipleCards() {
   const validatePasswordForm = () => {
     const temp = {};
 
-    if (!passwordData.current.trim()) temp.current = "Current password required.";
-    if (!passwordData.newPass.trim()) temp.newPass = "New password required.";
-    if (!passwordData.confirm.trim()) temp.confirm = "Confirm password required.";
-    if (passwordData.newPass !== passwordData.confirm)
-      temp.confirm = "Passwords do not match.";
+    if (!passwordData.old_password.trim())
+      temp.old_password = "Current password required.";
+    if (!passwordData.new_password.trim())
+      temp.new_password = "New password required.";
+    if (!passwordData.confirm_password.trim())
+      temp.confirm_password = "Confirm password required.";
+    if (passwordData.new_password !== passwordData.confirm_password)
+      temp.confirm_password = "Passwords do not match.";
 
     setPassErrors(temp);
     return Object.keys(temp).length === 0;
   };
 
-  const handlePasswordSubmit = () => {
+  const handlePasswordSubmit = async () => {
     if (!validatePasswordForm()) return;
 
-    console.log("Password Updated:", passwordData);
-    setShowPasswordModal(false);
-    setPasswordData({ current: "", newPass: "", confirm: "" });
-    setStrength("");
+    const response = await axios.post(
+      BaseAPI + "/admin/candidate/change-password",
+      passwordData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+
+    if(response.data.status === 200){
+      Swal.fire({
+        icon: 'success',
+        title: 'Password Updated',
+        text: 'Your password has been updated successfully.',
+        confirmButtonColor: '#6366F1',
+      }).then(() => {
+        router.push('/candidate-panel/profile');
+      });
+      setShowPasswordModal(false);
+      setPasswordData({
+        old_password: "",
+        new_password: "",
+        confirm_password: "",
+      });
+      setStrength("");
+    }
+
+    // console.log("Password Updated:", passwordData);
+    
   };
 
-  const handleNotificationChange = (e) => {
-    const { name, checked } = e.target;
-    setSettings((p) => ({ ...p, notifications: { ...p.notifications, [name]: checked } }));
-  };
+  const handleDeleteAccount = async () => {
+    try {
+      const response = await axios.post(
+        BaseAPI + "/admin/candidate/delete-account",
+        null,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
 
-  const handlePrivacyChange = (e) => {
-    const { name, type, value, checked } = e.target;
-    setSettings((p) => ({
-      ...p,
-      privacy: { ...p.privacy, [name]: type === "checkbox" ? checked : value },
-    }));
-  };
+      if (response.data.status === 200) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Account Deleted',
+          text: 'Your account has been deleted successfully.',
+          confirmButtonColor: '#6366F1',
+        }).then(() => {
+          router.push('/');
+          Cookies.remove('tokenCandidate');
+          Cookies.remove('userType');
+          Cookies.remove('candidateData');
+        });
+      }
+    } catch (error) {
+      console.error("Error deleting account:", error.message);
+    }
+  }
 
-  const handleEmailChange = (e) =>
-    setSettings((p) => ({ ...p, email: e.target.value }));
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Saved:", settings);
-  };
+
+
 
   return (
     <div className="relative min-h-screen px-6 py-14">
@@ -98,92 +159,93 @@ export default function SettingsMultipleCards() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#0f1124] via-[#15172e] to-[#080912]" />
 
       <div className="max-w-6xl mx-auto space-y-6">
-
         {/* Header */}
-        <motion.header initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-between items-start">
+        <motion.header
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="flex justify-between items-start"
+        >
           <div>
             <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
-            Setting
-          </h1>
-          <p className="text-gray-400 mt-4 max-w-2xl text-lg">
-            Manage account, notifications, privacy, and security.
-          </p>
+              Setting
+            </h1>
+            <p className="text-gray-400 mt-4 max-w-2xl text-lg">
+              Manage account, notifications, privacy, and security.
+            </p>
 
-          <div className="mt-6 h-1 w-24 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" />
-            
+            <div className="mt-6 h-1 w-24 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" />
           </div>
-
-          
         </motion.header>
-{/* CARDS */}
+        {/* CARDS */}
         <div className="space-y-6">
-        
+          {/* Change Password Card */}
+          <Card>
+            <CardTitle
+              title="Security"
+              subtitle="Password and account security options."
+            />
 
-        {/* Change Password Card */}
-        <Card>
-          <CardTitle title="Security" subtitle="Password and account security options." />
+            <button
+              onClick={() => setShowPasswordModal(true)}
+              className="px-4 py-2 mt-4 bg-white/10 border border-white/20 text-white rounded-lg hover:bg-white/20 transition"
+            >
+              Change Password
+            </button>
+          </Card>
 
-          <button
-            onClick={() => setShowPasswordModal(true)}
-            className="px-4 py-2 mt-4 bg-white/10 border border-white/20 text-white rounded-lg hover:bg-white/20 transition"
-          >
-            Change Password
-          </button>
-        </Card>
+          {/* DELETE ACCOUNT SECTION */}
+          <DangerCard>
+            <h2 className="text-xl font-semibold text-red-400">Danger Zone</h2>
+            <p className="text-gray-300 text-sm">
+              Permanently delete your account and all data.
+            </p>
 
-        
-
-       
-
-        {/* DELETE ACCOUNT SECTION */}
-        <DangerCard>
-          <h2 className="text-xl font-semibold text-red-400">Danger Zone</h2>
-          <p className="text-gray-300 text-sm">Permanently delete your account and all data.</p>
-
-          <button
-            onClick={() => setShowDeleteModal(true)}
-            className="mt-4 px-4 py-2 border border-red-400 text-red-400 rounded-lg hover:bg-red-500/10 transition"
-          >
-            Delete Account
-          </button>
-        </DangerCard>
+            <button
+              onClick={() => setShowDeleteModal(true)}
+              className="mt-4 px-4 py-2 border border-red-400 text-red-400 rounded-lg hover:bg-red-500/10 transition"
+            >
+              Delete Account
+            </button>
+          </DangerCard>
         </div>
       </div>
 
       {/* CHANGE PASSWORD MODAL */}
       <AnimatePresence>
         {showPasswordModal && (
-          <Modal onClose={() => setShowPasswordModal(false)} title="Change Password">
-
+          <Modal
+            onClose={() => setShowPasswordModal(false)}
+            title="Change Password"
+          >
             {/* CURRENT PASSWORD */}
             <PasswordInput
               label="Current Password"
-              name="current"
-              value={passwordData.current}
-              error={passErrors.current}
+              name="old_password"
+              value={passwordData.old_password}
+              error={passErrors.old_password}
               onChange={handlePasswordChange}
             />
 
             {/* NEW PASSWORD */}
             <PasswordInput
               label="New Password"
-              name="newPass"
-              value={passwordData.newPass}
-              error={passErrors.newPass}
+              name="new_password"
+              value={passwordData.new_password}
+              error={passErrors.new_password}
               onChange={handlePasswordChange}
             />
 
             {/* Password Strength */}
-            {passwordData.newPass && (
+            {passwordData.new_password && (
               <PasswordStrengthIndicator strength={strength} />
             )}
 
             {/* CONFIRM PASSWORD */}
             <PasswordInput
               label="Confirm Password"
-              name="confirm"
-              value={passwordData.confirm}
-              error={passErrors.confirm}
+              name="confirm_password"
+              value={passwordData.confirm_password}
+              error={passErrors.confirm_password}
               onChange={handlePasswordChange}
             />
 
@@ -203,7 +265,6 @@ export default function SettingsMultipleCards() {
                 Update Password
               </button>
             </div>
-
           </Modal>
         )}
       </AnimatePresence>
@@ -211,10 +272,13 @@ export default function SettingsMultipleCards() {
       {/* DELETE ACCOUNT MODAL */}
       <AnimatePresence>
         {showDeleteModal && (
-          <Modal onClose={() => setShowDeleteModal(false)} title="Delete Account">
-
+          <Modal
+            onClose={() => setShowDeleteModal(false)}
+            title="Delete Account"
+          >
             <p className="text-gray-300 text-sm">
-              This action cannot be undone. Are you sure you want to permanently delete your account?
+              This action cannot be undone. Are you sure you want to permanently
+              delete your account?
             </p>
 
             <div className="flex justify-end gap-3 mt-6">
@@ -228,14 +292,13 @@ export default function SettingsMultipleCards() {
               <button
                 className="px-4 py-2 bg-red-500 text-white rounded-lg"
                 onClick={() => {
-                  console.log("Account Deleted");
+                  handleDeleteAccount();
                   setShowDeleteModal(false);
                 }}
               >
                 Delete
               </button>
             </div>
-
           </Modal>
         )}
       </AnimatePresence>
@@ -357,9 +420,21 @@ function PasswordStrengthIndicator({ strength }) {
 
   return (
     <div className="mt-2">
-      <div className="text-sm text-gray-300 mb-1 capitalize">{strength} password</div>
+      <div className="text-sm text-gray-300 mb-1 capitalize">
+        {strength} password
+      </div>
       <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
-        <div className={`h-full ${color} transition-all`} style={{ width: strength === "weak" ? "30%" : strength === "medium" ? "60%" : "100%" }} />
+        <div
+          className={`h-full ${color} transition-all`}
+          style={{
+            width:
+              strength === "weak"
+                ? "30%"
+                : strength === "medium"
+                ? "60%"
+                : "100%",
+          }}
+        />
       </div>
     </div>
   );
@@ -385,7 +460,12 @@ function Modal({ children, title, onClose }) {
       >
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">{title}</h2>
-          <button onClick={onClose} className="text-gray-300 hover:text-white text-lg">×</button>
+          <button
+            onClick={onClose}
+            className="text-gray-300 hover:text-white text-lg"
+          >
+            ×
+          </button>
         </div>
 
         {children}

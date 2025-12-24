@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 export default function PersonalDetails() {
   const router = useRouter();
@@ -251,23 +252,41 @@ export default function PersonalDetails() {
         </div>
 
         {/* BUTTONS */}
-        <div className="mt-12 flex justify-between">
-          {/* Disabled Back Button (only for consistency) */}
+        <div className="mt-8 flex justify-between">
+          {/* BACK */}
           <button
+            onClick={handleBack}
+            className="
+              inline-flex items-center gap-2
+              px-8 py-3
+              bg-white/10 border border-white/20
+              rounded-xl text-white
+              hover:bg-white/15 transition
+            "
             disabled
-            className="px-8 py-3 bg-white/10 border border-white/20 rounded-xl text-white opacity-40 cursor-not-allowed"
           >
-            Back
+            <BsArrowLeft className="text-2xl" /> Back
           </button>
-
+        
           {/* NEXT */}
           <button
             onClick={handleNext}
-            className="px-10 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 
-            text-white text-lg font-medium rounded-xl shadow-lg hover:shadow-purple-500/40 
-            transition-all duration-300"
+            className="
+              group inline-flex items-center gap-3
+              px-8 py-3
+              bg-gradient-to-r from-indigo-500 to-purple-600
+              text-white rounded-xl
+              hover:shadow-lg transition
+            "
           >
-            Next →
+            Next
+            <BsArrowRight
+              className="
+                text-2xl
+                transform transition-transform
+                group-hover:translate-x-1
+              "
+            />
           </button>
         </div>
       </motion.div>

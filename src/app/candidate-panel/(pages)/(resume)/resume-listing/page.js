@@ -111,9 +111,8 @@ export default function ResumeVersions() {
           <div className="mt-6 h-1 w-24 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" />
         </motion.div>
 
-        {/* CARDS */}
+        {/* CONTENT */}
         <div className="space-y-6">
-
           {/* SKELETON LOADING */}
           {loading &&
             Array.from({ length: 3 }).map((_, i) => (
@@ -132,7 +131,53 @@ export default function ResumeVersions() {
               </div>
             ))}
 
-          {/* REAL DATA LIST */}
+          {/* EMPTY STATE */}
+          {!loading && resumeList.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="
+                mt-20 flex flex-col items-center text-center
+                backdrop-blur-3xl bg-white/10 border border-white/20
+                rounded-3xl p-14 neon-card
+              "
+            >
+              <div className="mb-6 w-20 h-20 rounded-full 
+                bg-gradient-to-br from-indigo-500/30 to-purple-600/30
+                flex items-center justify-center shadow-lg">
+                <span className="text-4xl">📄</span>
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl font-semibold text-white">
+                No Resumes Found
+              </h2>
+
+              <p className="text-gray-400 mt-4 max-w-xl text-lg">
+                You haven’t created or uploaded a resume yet.  
+                Start by building one or importing an existing resume.
+              </p>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() =>
+                  router.push("/candidate-panel/build-resume")
+                }
+                className="
+                  mt-10 px-10 py-4
+                  bg-gradient-to-r from-indigo-500 to-purple-600
+                  text-white text-lg font-medium rounded-xl
+                  shadow-lg hover:shadow-purple-500/40
+                  transition-all duration-300
+                "
+              >
+                Create Your First Resume →
+              </motion.button>
+            </motion.div>
+          )}
+
+          {/* RESUME LIST */}
           {!loading &&
             resumeList.map((resume, index) => (
               <motion.div
@@ -147,78 +192,51 @@ export default function ResumeVersions() {
 
                 <div className="p-6 sm:p-7 flex justify-between items-center max-sm:flex-col max-sm:items-start gap-4">
                   <div>
-                    <h3 className="text-xl font-semibold text-white transition">
+                    <h3 className="text-xl font-semibold text-white">
                       {resume.title}
                     </h3>
-                    <p className="text-gray-400 mt-1">{resume.description}</p>
+                    <p className="text-gray-400 mt-1">
+                      {resume.description}
+                    </p>
                     <span className="text-sm text-indigo-400 mt-2 block">
                       {resume.updated}
                     </span>
                   </div>
 
-                  {/* ICON BUTTONS */}
                   <div className="flex items-center gap-3">
-                    {/* VIEW BUTTON */}
                     <motion.button
                       whileTap={{ scale: 0.9 }}
                       onClick={() => handleViewResume(resume.id)}
-                      className="
-                        relative p-2 rounded-full
-                        bg-indigo-500/20 border border-indigo-400/30
-                        text-indigo-300 transition
-                        hover:bg-indigo-500/30 hover:text-indigo-200
-                        group
-                      "
+                      className="p-2 rounded-full bg-indigo-500/20 
+                      border border-indigo-400/30 text-indigo-300
+                      hover:bg-indigo-500/30 transition"
                     >
                       <BsEye className="text-lg" />
-
-                      <span
-                        className="
-                          absolute -top-9 left-1/2 -translate-x-1/2
-                          bg-black/80 text-white text-xs px-2 py-1 rounded
-                          opacity-0 group-hover:opacity-100
-                          pointer-events-none whitespace-nowrap
-                          transition
-                        "
-                      >
-                        View Resume
-                      </span>
                     </motion.button>
 
-                    {/* DELETE BUTTON */}
                     <motion.button
                       whileTap={{ scale: 0.9 }}
                       onClick={() => handleDeleteResume(resume.id)}
-                      className="
-                        relative p-2 rounded-full
-                        bg-red-500/20 border border-red-400/30
-                        text-red-300 transition
-                        hover:bg-red-500/30 hover:text-red-200
-                        group
-                      "
+                      className="p-2 rounded-full bg-red-500/20 
+                      border border-red-400/30 text-red-300
+                      hover:bg-red-500/30 transition"
                     >
                       <BsTrash className="text-lg" />
-
-                      <span
-                        className="
-                          absolute -top-9 left-1/2 -translate-x-1/2
-                          bg-black/80 text-white text-xs px-2 py-1 rounded
-                          opacity-0 group-hover:opacity-100
-                          pointer-events-none whitespace-nowrap
-                          transition
-                        "
-                      >
-                        Delete Resume
-                      </span>
                     </motion.button>
                   </div>
-                  {/* END ICON BUTTONS */}
                 </div>
               </motion.div>
             ))}
-          {/* END DATA */}
         </div>
       </div>
+
+      {/* Neon shadow */}
+      <style>{`
+        .neon-card {
+          box-shadow: 0 0 40px rgba(139, 92, 246, 0.25),
+                      inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+      `}</style>
     </div>
   );
 }
