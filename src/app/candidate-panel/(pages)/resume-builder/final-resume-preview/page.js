@@ -106,20 +106,20 @@ export default function FinalResume() {
 
   const handleSave = async () => {
     const payload = buildResumePayload();
-    console.log("Sending resume:", payload); // just to check
+    // console.log("Sending resume:", payload); // just to check
 
     await submitToAPI();
 
     // Clear local storage after sending
-    // localStorage.removeItem("rb_personal");
-    // localStorage.removeItem("rb_education");
-    // localStorage.removeItem("rb_work");
-    // localStorage.removeItem("rb_skills");
-    // localStorage.removeItem("rb_projects");
-    // localStorage.removeItem("rb_achievements");
-    // localStorage.removeItem("rb_summary");
+    localStorage.removeItem("rb_personal");
+    localStorage.removeItem("rb_education");
+    localStorage.removeItem("rb_work");
+    localStorage.removeItem("rb_skills");
+    localStorage.removeItem("rb_projects");
+    localStorage.removeItem("rb_achievements");
+    localStorage.removeItem("rb_summary");
 
-    // router.push("/candidate-panel/dashboard");
+    router.push("/candidate-panel/dashboard");
   };
 
 

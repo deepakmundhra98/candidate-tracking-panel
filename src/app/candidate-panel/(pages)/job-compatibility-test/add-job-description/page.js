@@ -39,6 +39,11 @@ export default function StepTwo() {
       return;
     }
 
+    localStorage.setItem(
+      "rb_jobDetails",
+      JSON.stringify({ jobTitle, jobDescription })
+    );
+
     console.log("Form valid → Generate score!");
 
     router.push("/candidate-panel/job-compatibility-test/match-score");

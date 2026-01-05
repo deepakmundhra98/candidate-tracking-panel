@@ -41,10 +41,18 @@ export default function Header() {
     return pathname === path ? "text-[#27BAEE]" : "text-gray-500";
   };
 
-  const raw = Cookies.get("candidateData");
-  if (!raw) return null;
-  const decoded = decodeURIComponent(raw);
-  let actualUserData = JSON.parse(decoded);
+let actualUserData = null;
+
+const raw = Cookies.get("candidateData");
+if (raw) {
+  try {
+    const decoded = decodeURIComponent(raw);
+    actualUserData = JSON.parse(decoded);
+  } catch (err) {
+    console.error("Invalid candidateData cookie");
+  }
+}
+
 
   return (
     <div className="border-b">
@@ -119,7 +127,7 @@ export default function Header() {
             </div>
           </div>
 
-          {actualUserData.first_name ? (
+          {actualUserData?.first_name ? (
             <>
               <Link
                 href="/candidate-panel/profile"
@@ -206,7 +214,7 @@ export default function Header() {
               Pricing
             </Link>
 
-            {actualUserData.first_name ? (
+            {actualUserData?.first_name ? (
               <>
                 <Link
                   href="/candidate-panel/profile"

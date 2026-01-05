@@ -3,6 +3,7 @@ import "./globals.css";
 import QueryClientWrapper from "./QueryClientWrapper";
 import Domain from "@/app/BaseAPI/Domain";
 import Providers from "./providers";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -126,6 +127,24 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <meta
+          name="google-site-verification"
+          content="1I_8_MQLjn-9LQhaZB4PLEucH45d1Ok6sHv5cddN5QM"
+        />
+
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-QZ5QZXKRYE"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-QZ5QZXKRYE');
+          `}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

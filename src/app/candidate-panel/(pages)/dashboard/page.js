@@ -1,9 +1,16 @@
 "use client";
 
+import BaseAPI from "@/app/BaseAPI/BaseAPI";
 import { BarChart, LineChart, PieChart } from "@mui/x-charts";
+import axios from "axios";
 import { motion } from "framer-motion";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 
 export default function CandidateDashboard() {
+  const token = Cookies.get("tokenCandidate");
+  const [countData, setCountData] = useState(null);
+
   const stats = [
     {
       name: "ATS Score",
@@ -41,6 +48,31 @@ export default function CandidateDashboard() {
     { id: 3, content: "Saved Backend Developer role", date: "1d ago" },
     { id: 4, content: "Updated resume version v4", date: "2d ago" },
   ];
+
+  const getData = async () => {
+    try {
+      const response = await axios.post(
+        BaseAPI + "/admin/candidates/dashboard",
+        null,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+    setCountData(response.data.response.data);
+
+      console.log("Dashboard data:", response.data);
+    } catch (error) {
+      console.log("Error fetching data:", error.message);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const nextActions = [
     "Add missing keywords to reach 80% ATS score",

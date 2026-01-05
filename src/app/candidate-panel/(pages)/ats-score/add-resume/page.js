@@ -1,58 +1,71 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BsFileEarmarkPdf, BsTrash } from "react-icons/bs";
-import axios from "axios";
-import BaseAPI from "@/app/BaseAPI/BaseAPI";
-import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
 export default function ATSResumeUpload() {
   const [resumeFile, setResumeFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const token = Cookies.get("tokenCandidate");
+
+  const fileInputRef = useRef(null);
   const router = useRouter();
 
-  // 1️⃣ ONLY store file
+  /* ------------------------------------
+   * Handle file selection
+   * ------------------------------------ */
   const handleUpload = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files?.[0];
     if (!file) return;
+
+    // Optional validation
+    if (file.size > 5 * 1024 * 1024) {
+      Swal.fire("File too large", "Max file size is 5MB", "warning");
+      return;
+    }
+
     setResumeFile(file);
+    e.target.value = ""; // allow re-select same file
   };
 
-  // 2️⃣ API call on button click
-  const handleCheckATS = async () => {
+  /* ------------------------------------
+   * Store file + redirect
+   * ------------------------------------ */
+  const handleCheckATS = () => {
     if (!resumeFile) return;
 
-    router.push("/candidate-panel/ats-score/result");
-    return;
-
     setLoading(true);
-    const formData = new FormData();
-    formData.append("resume", resumeFile);
 
-    try {
-      const res = await axios.post(
-        `${BaseAPI}/candidate/ats-score`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+    const reader = new FileReader();
 
-      if (res.data.status === 200) {
-        router.push(`/candidate-panel/ats-result?score=${res.data.score}`);
+    reader.onload = () => {
+      try {
+        localStorage.setItem(
+          "rb_ats_resume",
+          JSON.stringify({
+            name: resumeFile.name,
+            type: resumeFile.type,
+            size: resumeFile.size,
+            data: reader.result,
+          })
+        );
+
+        router.push("/candidate-panel/ats-score/result");
+      } catch (err) {
+        Swal.fire("Error", "Failed to store resume", "error");
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      Swal.fire("Error", "Failed to calculate ATS score", "error");
-    } finally {
+    };
+
+    reader.onerror = () => {
       setLoading(false);
-    }
+      Swal.fire("Error", "Failed to read resume file", "error");
+    };
+
+    reader.readAsDataURL(resumeFile);
   };
 
   return (
@@ -63,12 +76,8 @@ export default function ATSResumeUpload() {
       <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-600/25 blur-[140px] rounded-full" />
 
       <div className="max-w-6xl mx-auto space-y-6">
-
         {/* HEADER */}
-        <motion.header
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
+        <motion.header initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <h1 className="text-4xl sm:text-5xl font-bold text-white">
             ATS Score Checker
           </h1>
@@ -88,10 +97,11 @@ export default function ATSResumeUpload() {
             Upload your resume to calculate your ATS compatibility score
           </p>
 
-          {/* UPLOAD */}
-          <motion.label
+          {/* UPLOAD AREA */}
+          <motion.div
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
+            onClick={() => fileInputRef.current?.click()}
             className="flex flex-col items-center justify-center p-10 border border-dashed 
             border-indigo-400/40 rounded-xl cursor-pointer bg-white/5 hover:bg-white/10"
           >
@@ -101,14 +111,16 @@ export default function ATSResumeUpload() {
             <span className="text-xs text-gray-400 mt-1">
               Max size 5MB
             </span>
+          </motion.div>
 
-            <input
-              type="file"
-              accept=".pdf,.doc,.docx"
-              onChange={handleUpload}
-              className="hidden"
-            />
-          </motion.label>
+          {/* HIDDEN INPUT */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".pdf,.doc,.docx"
+            onChange={handleUpload}
+            className="hidden"
+          />
 
           {/* FILE PREVIEW */}
           <AnimatePresence>
@@ -116,7 +128,8 @@ export default function ATSResumeUpload() {
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-6 flex items-center justify-between p-4 rounded-lg bg-white/10 border border-white/20"
+                className="mt-6 flex items-center justify-between p-4 rounded-lg 
+                bg-white/10 border border-white/20"
               >
                 <div className="flex items-center gap-4">
                   <BsFileEarmarkPdf className="text-red-400 text-3xl" />
@@ -132,7 +145,8 @@ export default function ATSResumeUpload() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setResumeFile(null)}
-                  className="p-2 rounded-full bg-red-500/20 border border-red-400/40 text-red-300"
+                  className="p-2 rounded-full bg-red-500/20 
+                  border border-red-400/40 text-red-300"
                 >
                   <BsTrash />
                 </motion.button>
@@ -140,7 +154,7 @@ export default function ATSResumeUpload() {
             )}
           </AnimatePresence>
 
-          {/* CTA BUTTON */}
+          {/* CTA */}
           <AnimatePresence>
             {resumeFile && (
               <motion.button
@@ -148,8 +162,8 @@ export default function ATSResumeUpload() {
                 animate={{ opacity: 1, y: 0 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={handleCheckATS}
                 disabled={loading}
+                onClick={handleCheckATS}
                 className="mt-8 w-full py-4 rounded-xl bg-gradient-to-r 
                 from-indigo-500 to-purple-600 text-white text-lg font-medium 
                 shadow-lg disabled:opacity-50"
